@@ -12,7 +12,9 @@ export default {
           'home-heading-large': ['56px', '64px'], // Custom size and line-height
           'home-heading-small': ['28px', '34px'],
           'default': ['15px', '21px']
-      }
+      },
+
+      
     },
   },
   plugins: [],
