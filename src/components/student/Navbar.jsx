@@ -30,7 +30,7 @@ const Navbar = () => {
           </div>
               {
                 user ? (<UserButton/>) :
-                (<button onClick={()=> openSignIn()} className="bg-blue-600 text-white px-5 py-2 rounded-full cursor-pointer">Create Account</button>)
+                (<button onClick={()=> navigate('/auth')} className="bg-blue-600 text-white px-5 py-2 rounded-full cursor-pointer">Create Account</button>)
               }
       </div>
 

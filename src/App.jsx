@@ -13,6 +13,7 @@ import AddCourse from './pages/educator/AddCourse'
 import MyCourses from './pages/educator/MyCourses'
 import StudentsEnrolled from './pages/educator/StudentsEnrolled'
 import Navbar from './components/student/Navbar'
+import Auth from './pages/auth/Auth'
 
 
 
@@ -28,6 +29,7 @@ export const App = () => {
       {!isEducatorRoute && <Navbar/>}
       <Routes>
         <Route path='/' element={ <Home />} />
+        <Route path='/auth' element={ <Auth />} />
         <Route path='/course-list' element={ <CoursesList />} />
         <Route path='/course-list/:input' element={ <CoursesList />} />
         <Route path='/course/:id' element={ <CourseDetails />} />
