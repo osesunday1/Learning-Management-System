@@ -8,6 +8,17 @@ export const AppContext = createContext()
 
 export const AppContextProvider =(props) =>{
 
+
+/////////////////////////////USER\\\\\\\\\\\\\\\\\\\\\\\\\\
+
+//LOGOUT 
+ const logoutHandler = () => {
+  localStorage.removeItem("token");
+  localStorage.removeItem("role");
+  navigate("/"); // Redirect to login page after logout
+};
+
+
  /////////////////////////////COURSES\\\\\\\\\\\\\\\\\\\\\\\\\\\
     //courses
     const [allCourses, setAllCourses] = useState([])
@@ -93,7 +104,9 @@ export const AppContextProvider =(props) =>{
     const navigate= useNavigate()
 
     const value = {
-        currency, allCourses, 
+        logoutHandler,
+        currency, 
+        allCourses, 
         navigate, 
         calculateRating, 
         isEducator, 

@@ -14,8 +14,9 @@ import MyCourses from './pages/educator/MyCourses'
 import StudentsEnrolled from './pages/educator/StudentsEnrolled'
 import Navbar from './components/student/Navbar'
 import Auth from './pages/auth/Auth'
-
-
+import { Navigate, Outlet } from "react-router-dom";
+import Unauthorized from './components/auth/Unauthorized'
+import ProtectedRoute from './components/auth/ProtectedRoute'
 
 export const App = () => {
 
@@ -30,7 +31,12 @@ export const App = () => {
       <Routes>
         <Route path='/' element={ <Home />} />
         <Route path='/auth' element={ <Auth />} />
+
+        {/* Protected Routes 
+        <Route element={<ProtectedRoute allowedRoles={["student"]} />}>
+        </Route>*/}
         <Route path='/course-list' element={ <CoursesList />} />
+       
         <Route path='/course-list/:input' element={ <CoursesList />} />
         <Route path='/course/:id' element={ <CourseDetails />} />
         <Route path='/my-enrollments' element={ <MyEnrollments />} />
@@ -43,6 +49,8 @@ export const App = () => {
             <Route path='my-courses' element={ <MyCourses/>}/>
             <Route path='student-enrolled' element={ <StudentsEnrolled/>}/>
         </Route>
+
+        <Route path='/unauthorized' element={<Unauthorized/>} />
       </Routes>
 
     </div>

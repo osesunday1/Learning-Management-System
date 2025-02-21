@@ -2,6 +2,17 @@
 
 @import "tailwindcss";
 
+@theme {
+  --font-primary: "Poppins", "serif";
+  --color-mint-500: oklch(0.72 0.11 178);
+  --color-primary: #bb93ae;
+  --color-primary-100: #6b4f62;
+  --color-secondary:#293240;
+  --color-secondary-100:#1c222b;
+  
+}
+
+/* ... */
 
 *{
   font-family:Outfit;

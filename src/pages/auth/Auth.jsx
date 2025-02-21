@@ -1,17 +1,46 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import styled from "styled-components";
+import { AppContext } from "../../context/AppContext";
+
+
 
 const Auth = () => {
   const [isLogin, setIsLogin] = useState(false);
-  function loginHandler(){
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const {navigate} = useContext(AppContext)
+
+
+    const loginHandler = async () => {
+      const apiUrl = import.meta.env.VITE_BACKEND_URL;
+      const response = await fetch(`${apiUrl}/auth/login`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email, password }),
+      });
+      
+      const data = await response.json();
+      if (data.token) {
+        localStorage.setItem("token", data.token);
+        localStorage.setItem("role", data.data.user.role);
+         navigate('/my-enrollments')
+      } else {
+        alert("Invalid login credentials");
+      }
+    };
+  
+
+
+  function loginSwitch(){
     setIsLogin(!isLogin)
   }
 
   return (
     <Container>
-      <MainBox>
-        <SUpForm >
-          <Label onClick={loginHandler} isLogin={isLogin}>Sign Up</Label>
+      <MainBox className="bg-primary-100">
+
+        <SUpForm className="bg-primary-100">
+          <Label onClick={loginSwitch} $isLogin={isLogin}>Sign Up</Label>
           <Input type="text" placeholder="Full Name" required />
           <Input type="email" placeholder="Email" required />
           <Input type="password" placeholder="Password" required />
@@ -19,14 +48,13 @@ const Auth = () => {
           <Button>Sign Up</Button>
         </SUpForm>
 
-        <LForm isLogin={isLogin}>
-        <Label2 onClick={loginHandler} isLogin={isLogin}>Login</Label2>
-            <Input type="email" placeholder="Email" required />
-            <Input type="password" placeholder="Password" required />
-            <Button2>Login</Button2>
+        <LForm $isLogin={isLogin}>
+        <Label2 onClick={loginSwitch} $isLogin={isLogin} className="text-primary-100">Login</Label2>
+            <Input type="email" placeholder="Email" required  onChange={(e) => setEmail(e.target.value)}/>
+            <Input type="password" placeholder="Password" required onChange={(e) => setPassword(e.target.value)}/>
+            <Button2 className="bg-primary-100 hover:border-primary-100" onClick={loginHandler}>Login</Button2>
         </LForm>
 
-        
       </MainBox>
       </Container>
   );
@@ -46,7 +74,6 @@ const MainBox = styled.div`
   position: relative;
   width: 350px;
   height: 500px;
-  background:rgb(15, 55, 175);
   border-radius: 10px;
   box-shadow: 5px 20px 50px #000;
   overflow: hidden;
@@ -57,7 +84,6 @@ const SUpForm = styled.div`
   position: absolute;
   width: 100%;
   height: 100%;
-  background: rgb(15, 55, 175);
   border-radius: 60% / 10%;
   transition: 0.8s ease-in-out;
   display: flex;
@@ -75,14 +101,14 @@ const LForm = styled.div`
 	height: 360px;
 	background: #eee;
 	border-radius: 20% / 20%;
-	transform: ${(props) => (props.isLogin ? 'translateY(130px)' : 'translateY(430px)')};
+	transform: ${(props) => (props.$isLogin ? 'translateY(130px)' : 'translateY(430px)')};
 	transition: .8s ease-in-out;
 `;
 
 
 const Label = styled.label`
   color:#fff;
-  font-size:${(props) => (props.isLogin ? '1em' : '2em')};
+  font-size:${(props) => (props.$isLogin ? '1em' : '2em')};
   font-weight: bold;
   cursor: pointer;
   transition: 0.3s;
@@ -93,7 +119,6 @@ const Label = styled.label`
 `;
 
 const Label2 = styled.label`
-  color:rgb(15, 55, 175);
   font-size: 2em;
   font-weight: bold;
   cursor: pointer;
@@ -120,7 +145,6 @@ const Button = styled.button`
   width: 70%;
   height: 40px;
   margin-top: 20px;
-  color: rgb(15, 55, 175);
   background:#fff;
   font-size: 1em;
   font-weight: bold;
@@ -130,8 +154,8 @@ const Button = styled.button`
   transition: 0.3s;
 
   &:hover {
-    background: rgb(15, 55, 175);
-    border: 2px solid #e0dede;
+    background: #293240;
+    border: 2px solid #1c222b;
     color: #e0dede;
   }
 `;
@@ -141,7 +165,6 @@ const Button2 = styled.button`
   height: 40px;
   margin-top: 20px;
   color: #fff;
-  background:rgb(15, 55, 175);
   font-size: 1em;
   font-weight: bold;
   border: none;
@@ -151,8 +174,8 @@ const Button2 = styled.button`
 
   &:hover {
     background: #fff;
-    border: 2px solid rgb(15, 55, 175);
-    color: rgb(15, 55, 175);
+    border: 2px solid #1c222b;
+    color: #1c222b;
   }
 `;
 

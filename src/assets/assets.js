@@ -127,48 +127,48 @@ export const dummyTestimonial = [
 
 export const dummyDashboardData = {
     "totalEarnings": 707.38,
-    "enrolledStudentsData": [
-        {
-            "courseTitle": "Introduction to JavaScript",
-            "student": {
-                "_id": "user_2qQlvXyr02B4Bq6hT0Gvaa5fT9V",
-                "name": "Great Stack",
-                "imageUrl": "https://img.clerk.com/eyJ0eXBlIjoicHJveHkiLCJzcmMiOiJodHRwczovL2ltYWdlcy5jbGVyay5kZXYvb2F1dGhfZ29vZ2xlL2ltZ18ycVFsdmFMSkw3ckIxNHZMU2o4ZURWNEtmR2IifQ"
-            }
-        },
-        {
-            "courseTitle": "Advanced Python Programming",
-            "student": {
-                "_id": "user_2qQlvXyr02B4Bq6hT0Gvaa5fT9V",
-                "name": "Great Stack",
-                "imageUrl": "https://img.clerk.com/eyJ0eXBlIjoicHJveHkiLCJzcmMiOiJodHRwczovL2ltYWdlcy5jbGVyay5kZXYvb2F1dGhfZ29vZ2xlL2ltZ18ycVFsdmFMSkw3ckIxNHZMU2o4ZURWNEtmR2IifQ"
-            }
-        },
-        {
-            "courseTitle": "Web Development Bootcamp",
-            "student": {
-                "_id": "user_2qQlvXyr02B4Bq6hT0Gvaa5fT9V",
-                "name": "Great Stack",
-                "imageUrl": "https://img.clerk.com/eyJ0eXBlIjoicHJveHkiLCJzcmMiOiJodHRwczovL2ltYWdlcy5jbGVyay5kZXYvb2F1dGhfZ29vZ2xlL2ltZ18ycVFsdmFMSkw3ckIxNHZMU2o4ZURWNEtmR2IifQ"
-            }
-        },
-        {
-            "courseTitle": "Data Science with Python",
-            "student": {
-                "_id": "user_2qQlvXyr02B4Bq6hT0Gvaa5fT9V",
-                "name": "Great Stack",
-                "imageUrl": "https://img.clerk.com/eyJ0eXBlIjoicHJveHkiLCJzcmMiOiJodHRwczovL2ltYWdlcy5jbGVyay5kZXYvb2F1dGhfZ29vZ2xlL2ltZ18ycVFsdmFMSkw3ckIxNHZMU2o4ZURWNEtmR2IifQ"
-            }
-        },
-        {
-            "courseTitle": "Cybersecurity Basics",
-            "student": {
-                "_id": "user_2qQlvXyr02B4Bq6hT0Gvaa5fT9V",
-                "name": "Great Stack",
-                "imageUrl": "https://img.clerk.com/eyJ0eXBlIjoicHJveHkiLCJzcmMiOiJodHRwczovL2ltYWdlcy5jbGVyay5kZXYvb2F1dGhfZ29vZ2xlL2ltZ18ycVFsdmFMSkw3ckIxNHZMU2o4ZURWNEtmR2IifQ"
-            }
+"enrolledStudentsData": [
+    {
+        "courseTitle": "Foundations of a Strong Relationship",
+        "student": {
+            "_id": "user_1aB2Cd3EfGh4Ij5KlMn6OpQ",
+            "name": "John Doe",
+            "imageUrl": "https://res.cloudinary.com/dvh9j4utq/image/upload/v1721950115/FIRST_FOLDER/sov4z1bqyjjvmrm2vujg.jpg"
         }
-    ],
+    },
+    {
+        "courseTitle": "Pre-Marital Counseling: Preparing for a Lifetime Together",
+        "student": {
+            "_id": "user_7Xy8Z9aBcDeFgHiJkLmNoP",
+            "name": "Jane Smith",
+            "imageUrl": "https://res.cloudinary.com/dvh9j4utq/image/upload/v1721950434/FIRST_FOLDER/yr83a5kenuchd67xwaph.jpg"
+        }
+    },
+    {
+        "courseTitle": "Love Languages & Emotional Connection",
+        "student": {
+            "_id": "user_0QrStUvWxYzA1B2C3DeFgH",
+            "name": "Michael Johnson",
+            "imageUrl": "https://res.cloudinary.com/dvh9j4utq/image/upload/v1715786346/cld-sample.jpg"
+        }
+    },
+    {
+        "courseTitle": "Conflict Resolution for Couples",
+        "student": {
+            "_id": "user_4IjKlMnOpQrStUvWxYzA1B",
+            "name": "Sarah Williams",
+            "imageUrl": "https://img.clerk.com/sample-image-4"
+        }
+    },
+    {
+        "courseTitle": "Managing Finances as a Couple",
+        "student": {
+            "_id": "user_5C3DeFgHiJkLmNoP7Xy8Z9aB",
+            "name": "David Brown",
+            "imageUrl": "https://img.clerk.com/sample-image-5"
+        }
+    }
+],
     "totalCourses": 8
 }
 
@@ -176,37 +176,37 @@ export const dummyStudentEnrolled = [
     {
         "student": {
             "_id": "user_2qQlvXyr02B4Bq6hT0Gvaa5fT9V",
-            "name": "GreatStack",
-            "imageUrl": "https://img.clerk.com/eyJ0eXBlIjoicHJveHkiLCJzcmMiOiJodHRwczovL2ltYWdlcy5jbGVyay5kZXYvb2F1dGhfZ29vZ2xlL2ltZ18ycVFsdmFMSkw3ckIxNHZMU2o4ZURWNEtmR2IifQ"
+            "name": "Esther John",
+            "imageUrl": "https://res.cloudinary.com/dvh9j4utq/image/upload/v1721950150/FIRST_FOLDER/rle8zuya4uodo8ds8bhn.jpg"
         },
-        "courseTitle": "Introduction to JavaScript",
+        "courseTitle": "Pre-Marital Counseling",
         "purchaseDate": "2024-12-20T08:39:55.509Z"
     },
     {
         "student": {
             "_id": "user_2qQlvXyr02B4Bq6hT0Gvaa5fT9V",
-            "name": "GreatStack",
-            "imageUrl": "https://img.clerk.com/eyJ0eXBlIjoicHJveHkiLCJzcmMiOiJodHRwczovL2ltYWdlcy5jbGVyay5kZXYvb2F1dGhfZ29vZ2xlL2ltZ18ycVFsdmFMSkw3ckIxNHZMU2o4ZURWNEtmR2IifQ"
+            "name": "Abraham Manji",
+            "imageUrl": "https://res.cloudinary.com/dvh9j4utq/image/upload/v1721950115/FIRST_FOLDER/sov4z1bqyjjvmrm2vujg.jpg"
         },
-        "courseTitle": "Introduction to JavaScript",
+        "courseTitle": "Managing Finances as a Couple",
         "purchaseDate": "2024-12-20T08:59:49.964Z"
     },
     {
         "student": {
             "_id": "user_2qQlvXyr02B4Bq6hT0Gvaa5fT9V",
-            "name": "GreatStack",
-            "imageUrl": "https://img.clerk.com/eyJ0eXBlIjoicHJveHkiLCJzcmMiOiJodHRwczovL2ltYWdlcy5jbGVyay5kZXYvb2F1dGhfZ29vZ2xlL2ltZ18ycVFsdmFMSkw3ckIxNHZMU2o4ZURWNEtmR2IifQ"
+            "name": "Timothy Silas",
+            "imageUrl": "https://res.cloudinary.com/dvh9j4utq/image/upload/v1721950434/FIRST_FOLDER/yr83a5kenuchd67xwaph.jpg"
         },
-        "courseTitle": "Advanced Python Programming",
+        "courseTitle": "Foundations of a Strong Relationship",
         "purchaseDate": "2024-12-20T11:03:42.931Z"
     },
     {
         "student": {
             "_id": "user_2qQlvXyr02B4Bq6hT0Gvaa5fT9V",
-            "name": "GreatStack",
+            "name": "Rebecca Peter",
             "imageUrl": "https://img.clerk.com/eyJ0eXBlIjoicHJveHkiLCJzcmMiOiJodHRwczovL2ltYWdlcy5jbGVyay5kZXYvb2F1dGhfZ29vZ2xlL2ltZ18ycVFsdmFMSkw3ckIxNHZMU2o4ZURWNEtmR2IifQ"
         },
-        "courseTitle": "Web Development Bootcamp",
+        "courseTitle": "Managing Finances as a Couple",
         "purchaseDate": "2024-12-20T11:04:48.798Z"
     }
 ]
@@ -214,8 +214,8 @@ export const dummyStudentEnrolled = [
 export const dummyCourses = [
     {
         "_id": "605c72efb3f1c2b1f8e4e1a1",
-        "courseTitle": "Introduction to JavaScript",
-        "courseDescription": "<h2>Learn the Basics of JavaScript</h2><p>JavaScript is a versatile programming language that powers the web. In this course, you will learn the fundamentals of JavaScript, including syntax, data types, and control structures.</p><p>This course is perfect for beginners who want to start their journey in web development. By the end of this course, you will be able to create interactive web pages and understand the core concepts of JavaScript.</p><ul><li>Understand the basics of programming</li><li>Learn how to manipulate the DOM</li><li>Create dynamic web applications</li></ul>",
+        "courseTitle": "Foundations of a Strong Relationship",
+        "courseDescription": "<h2>Building a Lasting Bond</h2><p>Every successful relationship starts with a strong foundation. In this course, you will explore the key elements of a healthy partnership, including communication, trust, and emotional connection.</p><p>Designed for couples at any stage of their relationship, this course provides practical insights and exercises to help you strengthen your bond.</p><ul><li>Develop strong communication skills</li><li>Understand emotional needs in a relationship</li><li>Learn how to resolve conflicts effectively</li></ul>",
         "coursePrice": 49.99,
         "isPublished": true,
         "discount": 20,
@@ -223,21 +223,21 @@ export const dummyCourses = [
             {
                 "chapterId": "chapter1",
                 "chapterOrder": 1,
-                "chapterTitle": "Getting Started with JavaScript",
+                "chapterTitle": "The Essentials of a Healthy Relationship",
                 "chapterContent": [
                     {
                         "lectureId": "lecture1",
-                        "lectureTitle": "What is JavaScript?",
+                        "lectureTitle": "What Makes a Relationship Strong?",
                         "lectureDuration": 16,
-                        "lectureUrl": "https://youtu.be/CBWnBi-awSA",
+                        "lectureUrl": "https://www.youtube.com/watch?v=ft8xLw2L_RA",
                         "isPreviewFree": true,
                         "lectureOrder": 1
                     },
                     {
                         "lectureId": "lecture2",
-                        "lectureTitle": "Setting Up Your Environment",
+                        "lectureTitle": "Effective Communication in Relationships",
                         "lectureDuration": 19,
-                        "lectureUrl": "https://youtu.be/4l87c2aeB4I",
+                        "lectureUrl": "https://www.youtube.com/watch?v=LcTBdemn-y0",
                         "isPreviewFree": false,
                         "lectureOrder": 2
                     }
@@ -246,21 +246,21 @@ export const dummyCourses = [
             {
                 "chapterId": "chapter2",
                 "chapterOrder": 2,
-                "chapterTitle": "Variables and Data Types",
+                "chapterTitle": "Trust & Emotional Connection",
                 "chapterContent": [
                     {
                         "lectureId": "lecture3",
-                        "lectureTitle": "Understanding Variables",
+                        "lectureTitle": "Building and Maintaining Trust",
                         "lectureDuration": 20,
-                        "lectureUrl": "https://youtu.be/pZQeBJsGoDQ",
+                        "lectureUrl": "https://www.youtube.com/watch?v=iJ0NZrEaaQo",
                         "isPreviewFree": true,
                         "lectureOrder": 1
                     },
                     {
                         "lectureId": "lecture4",
-                        "lectureTitle": "Data Types in JavaScript",
+                        "lectureTitle": "The Role of Emotional Intelligence in Love",
                         "lectureDuration": 10,
-                        "lectureUrl": "https://youtu.be/ufHT2WEkkC4",
+                        "lectureUrl": "https://www.youtube.com/watch?v=C-UVxH19tb4",
                         "isPreviewFree": false,
                         "lectureOrder": 2
                     }
@@ -283,419 +283,12 @@ export const dummyCourses = [
         "createdAt": "2024-12-17T08:16:53.622Z",
         "updatedAt": "2025-01-02T04:47:44.701Z",
         "__v": 4,
-        "courseThumbnail": "https://img.youtube.com/vi/CBWnBi-awSA/maxresdefault.jpg"
+        "courseThumbnail": "https://img.youtube.com/vi/ft8xLw2L_RA/maxresdefault.jpg"
     },
     {
-        "_id": "675ac1512100b91a6d9b8b24",
-        "courseTitle": "Advanced Python Programming",
-        "courseDescription": "<h2>Deep Dive into Python Programming</h2><p>This course is designed for those who have a basic understanding of Python and want to take their skills to the next level. You will explore advanced topics such as decorators, generators, and context managers.</p><p>By the end of this course, you will be able to write efficient and clean Python code, and understand how to leverage Python's powerful features for real-world applications.</p><ul><li>Master advanced data structures</li><li>Implement object-oriented programming concepts</li><li>Work with libraries and frameworks</li></ul>",
-        "coursePrice": 79.99,
-        "isPublished": true,
-        "discount": 15,
-        "courseContent": [
-            {
-                "chapterId": "chapter1",
-                "chapterOrder": 1,
-                "chapterTitle": "Advanced Data Structures",
-                "chapterContent": [
-                    {
-                        "lectureId": " lecture1",
-                        "lectureTitle": "Lists and Tuples",
-                        "lectureDuration": 720,
-                        "lectureUrl": "https://youtu.be/HdLIMoQkXFA",
-                        "isPreviewFree": true,
-                        "lectureOrder": 1
-                    },
-                    {
-                        "lectureId": "lecture2",
-                        "lectureTitle": "Dictionaries and Sets",
-                        "lectureDuration": 850,
-                        "lectureUrl": "https://youtu.be/HdLIMoQkXFA",
-                        "isPreviewFree": false,
-                        "lectureOrder": 2
-                    }
-                ]
-            },
-            {
-                "chapterId": "chapter2",
-                "chapterOrder": 2,
-                "chapterTitle": "Object-Oriented Programming",
-                "chapterContent": [
-                    {
-                        "lectureId": "lecture3",
-                        "lectureTitle": "Classes and Objects",
-                        "lectureDuration": 900,
-                        "lectureUrl": "https://youtu.be/HdLIMoQkXFA",
-                        "isPreviewFree": true,
-                        "lectureOrder": 1
-                    },
-                    {
-                        "lectureId": "lecture4",
-                        "lectureTitle": "Inheritance and Polymorphism",
-                        "lectureDuration": 950,
-                        "lectureUrl": "https://youtu.be/HdLIMoQkXFA",
-                        "isPreviewFree": false,
-                        "lectureOrder": 2
-                    }
-                ]
-            }
-        ],
-        "educator": "675ac1512100b91a6d9b8b24",
-        "enrolledStudents": [
-            "user_2qQlvXyr02B4Bq6hT0Gvaa5fT9V",
-            "user_2qjlgkAqIMpiR2flWIRzvWKtE0w"
-        ],
-        "courseRatings": [
-            {
-                "userId": "user_2qjlgkAqIMpiR2flWIRzvWKtE0w",
-                "rating": 5,
-                "_id": "6776369244daad0f313d81a9"
-            }
-        ],
-        "createdAt": "2024-12-17T08:16:53.622Z",
-        "updatedAt": "2025-01-02T06:47:54.446Z",
-        "__v": 3,
-        "courseThumbnail": "https://img.youtube.com/vi/HdLIMoQkXFA/maxresdefault.jpg"
-    },
-    {
-        "_id": "605c72efb3f1c2b1f8e4e1ae",
-        "courseTitle": "Cybersecurity Basics",
-        "courseDescription": "<h2>Protect Systems and Networks</h2><p>Cybersecurity is critical in today's digital age. This course introduces the fundamentals of cybersecurity, including threat analysis, ethical hacking, and secure programming practices.</p><p>By the end of this course, you will understand how to identify vulnerabilities and implement security measures effectively.</p><ul><li>Understand security protocols</li><li>Learn about encryption techniques</li><li>Conduct basic penetration testing</li></ul>",
-        "coursePrice": 69.99,
-        "isPublished": true,
-        "discount": 15,
-        "courseContent": [
-            {
-                "chapterId": "chapter1",
-                "chapterOrder": 1,
-                "chapterTitle": "Introduction to Cybersecurity",
-                "chapterContent": [
-                    {
-                        "lectureId": "lecture1",
-                        "lectureTitle": "What is Cybersecurity?",
-                        "lectureDuration": 10,
-                        "lectureUrl": "https://youtu.be/samplelink5",
-                        "isPreviewFree": true,
-                        "lectureOrder": 1
-                    },
-                    {
-                        "lectureId": "lecture2",
-                        "lectureTitle": "Types of Cyber Threats",
-                        "lectureDuration": 18,
-                        "lectureUrl": "https://youtu.be/samplelink6",
-                        "isPreviewFree": false,
-                        "lectureOrder": 2
-                    }
-                ]
-            },
-            {
-                "chapterId": "chapter2",
-                "chapterOrder": 2,
-                "chapterTitle": "Basic Security Practices",
-                "chapterContent": [
-                    {
-                        "lectureId": "lecture3",
-                        "lectureTitle": "Password Management",
-                        "lectureDuration": 15,
-                        "lectureUrl": "https://youtu.be/samplelink7",
-                        "isPreviewFree": true,
-                        "lectureOrder": 1
-                    },
-                    {
-                        "lectureId": "lecture4",
-                        "lectureTitle": "Network Security Essentials",
-                        "lectureDuration": 20,
-                        "lectureUrl": "https://youtu.be/samplelink8",
-                        "isPreviewFree": false,
-                        "lectureOrder": 2
-                    }
-                ]
-            }
-        ],
-        "educator": "675ac1512100b91a6d9b8b24",
-        "enrolledStudents": [
-            "user_2qQlvXyr02B4Bq6hT0Gvaa5fT9V",
-            "user_2qjlgkAqIMpiR2flWIRzvWKtE0w"
-        ],
-        "courseRatings": [],
-        "createdAt": "2024-12-27T11:30:00.000Z",
-        "updatedAt": "2024-12-31T04:14:49.773Z",
-        "__v": 2,
-        "courseThumbnail": "https://img.youtube.com/vi/jZFaMEqEqEQ/maxresdefault.jpg"
-    },
-    {
-        "_id": "605c72efb3f1c2b1f8e4e1a7",
-        "courseTitle": "Web Development Bootcamp",
-        "courseDescription": "<h2>Become a Full-Stack Web Developer</h2><p>This comprehensive bootcamp covers everything you need to know to become a full-stack web developer. From HTML and CSS to JavaScript and backend technologies, this course is designed to take you from beginner to job-ready.</p><p>Throughout the course, you will work on real-world projects, build a portfolio, and gain the skills necessary to succeed in the tech industry.</p><ul><li>Learn front-end and back-end development</li><li>Build responsive and dynamic web applications</li><li>Understand databases and server-side programming</li></ul>",
-        "coursePrice": 99.99,
-        "isPublished": true,
-        "discount": 25,
-        "courseContent": [
-            {
-                "chapterId": "chapter1",
-                "chapterOrder": 1,
-                "chapterTitle": "HTML & CSS Basics",
-                "chapterContent": [
-                    {
-                        "lectureId": "lecture1",
-                        "lectureTitle": "Introduction to HTML",
-                        "lectureDuration": 600,
-                        "lectureUrl": "https://youtu.be/-HeadgoqJ7A",
-                        "isPreviewFree": true,
-                        "lectureOrder": 1
-                    },
-                    {
-                        "lectureId": "lecture2",
-                        "lectureTitle": "Styling with CSS",
-                        "lectureDuration": 720,
-                        "lectureUrl": "https://youtu.be/-HeadgoqJ7A",
-                        "isPreviewFree": false,
-                        "lectureOrder": 2
-                    }
-                ]
-            },
-            {
-                "chapterId": "chapter2",
-                "chapterOrder": 2,
-                "chapterTitle": "JavaScript Fundamentals",
-                "chapterContent": [
-                    {
-                        "lectureId": "lecture3",
-                        "lectureTitle": "JavaScript Basics",
-                        "lectureDuration": 800,
-                        "lectureUrl": "https://youtu.be/-HeadgoqJ7A",
-                        "isPreviewFree": true,
-                        "lectureOrder": 1
-                    },
-                    {
-                        "lectureId": "lecture4",
-                        "lectureTitle": "DOM Manipulation",
-                        "lectureDuration": 850,
-                        "lectureUrl": "https://youtu.be/-HeadgoqJ7A",
-                        "isPreviewFree": false,
-                        "lectureOrder": 2
-                    }
-                ]
-            }
-        ],
-        "educator": "675ac1512100b91a6d9b8b24",
-        "enrolledStudents": [
-            "user_2qQlvXyr02B4Bq6hT0Gvaa5fT9V",
-            "user_2qjlgkAqIMpiR2flWIRzvWKtE0w"
-        ],
-        "courseRatings": [],
-        "createdAt": "2024-12-17T08:16:53.622Z",
-        "updatedAt": "2024-12-31T05:31:27.290Z",
-        "__v": 2,
-        "courseThumbnail": "https://img.youtube.com/vi/lpx2zFkapIk/maxresdefault.jpg"
-    },
-    {
-        "_id": "605c72efb3f1c2b1f8e4e1ac",
-        "courseTitle": "Cloud Computing Essentials",
-        "courseDescription": "<h2>Master Cloud Fundamentals</h2><p>Learn the foundations of cloud computing and explore popular cloud platforms like AWS, Azure, and Google Cloud. This course is ideal for IT professionals and developers looking to transition to cloud-based solutions.</p><p>By the end of this course, you will understand cloud services, deployment models, and best practices for using cloud resources efficiently.</p><ul><li>Understand cloud architecture</li><li>Learn to work with AWS, Azure, and GCP</li><li>Explore serverless computing and storage solutions</li></ul>",
-        "coursePrice": 69.99,
-        "isPublished": true,
-        "discount": 20,
-        "courseContent": [
-            {
-                "chapterId": "chapter1",
-                "chapterOrder": 1,
-                "chapterTitle": "Cloud Fundamentals",
-                "chapterContent": [
-                    {
-                        "lectureId": "lecture1",
-                        "lectureTitle": "What is Cloud Computing?",
-                        "lectureDuration": 600,
-                        "lectureUrl": "https://youtu.be/-HeadgoqJ7A",
-                        "isPreviewFree": true,
-                        "lectureOrder": 1
-                    },
-                    {
-                        "lectureId": "lecture2",
-                        "lectureTitle": "Cloud Service Models",
-                        "lectureDuration": 720,
-                        "lectureUrl": "https://youtu.be/-HeadgoqJ7A",
-                        "isPreviewFree": false,
-                        "lectureOrder": 2
-                    }
-                ]
-            },
-            {
-                "chapterId": "chapter2",
-                "chapterOrder": 2,
-                "chapterTitle": "Exploring Cloud Platforms",
-                "chapterContent": [
-                    {
-                        "lectureId": "lecture3",
-                        "lectureTitle": "AWS Basics",
-                        "lectureDuration": 800,
-                        "lectureUrl": "https://youtu.be/-HeadgoqJ7A",
-                        "isPreviewFree": true,
-                        "lectureOrder": 1
-                    },
-                    {
-                        "lectureId": "lecture4",
-                        "lectureTitle": "Introduction to Google Cloud",
-                        "lectureDuration": 850,
-                        "lectureUrl": "https://youtu.be/-HeadgoqJ7A",
-                        "isPreviewFree": false,
-                        "lectureOrder": 2
-                    }
-                ]
-            }
-        ],
-        "educator": "675ac1512100b91a6d9b8b24",
-        "enrolledStudents": [
-            "user_2qjlgkAqIMpiR2flWIRzvWKtE0w"
-        ],
-        "courseRatings": [],
-        "createdAt": "2024-12-17T08:16:53.622Z",
-        "updatedAt": "2024-12-31T05:32:55.357Z",
-        "__v": 1,
-        "courseThumbnail": "https://img.youtube.com/vi/0yboGn8errU/maxresdefault.jpg"
-    },
-    {
-        "_id": "605c72efb3f1c2b1f8e4e1ad",
-        "courseTitle": "Data Science with Python",
-        "courseDescription": "<h2>Start Your Data Science Journey</h2><p>Data Science is one of the most in-demand fields in the world. This course teaches you the essentials of data analysis, visualization, and machine learning using Python. Learn libraries like Pandas, NumPy, Matplotlib, and Scikit-learn.</p><p>By the end of this course, you will be equipped to work on real-world data projects and gain insights from data.</p><ul><li>Data cleaning and preprocessing</li><li>Exploratory Data Analysis (EDA)</li><li>Build predictive models</li></ul>",
-        "coursePrice": 89.99,
-        "isPublished": true,
-        "discount": 20,
-        "courseContent": [
-            {
-                "chapterId": "chapter1",
-                "chapterOrder": 1,
-                "chapterTitle": "Python for Data Science",
-                "chapterContent": [
-                    {
-                        "lectureId": "lecture1",
-                        "lectureTitle": "Python Basics",
-                        "lectureDuration": 30,
-                        "lectureUrl": "https://youtu.be/samplelink1",
-                        "isPreviewFree": true,
-                        "lectureOrder": 1
-                    },
-                    {
-                        "lectureId": "lecture2",
-                        "lectureTitle": "Working with NumPy",
-                        "lectureDuration": 25,
-                        "lectureUrl": "https://youtu.be/samplelink2",
-                        "isPreviewFree": false,
-                        "lectureOrder": 2
-                    }
-                ]
-            },
-            {
-                "chapterId": "chapter2",
-                "chapterOrder": 2,
-                "chapterTitle": "Data Visualization",
-                "chapterContent": [
-                    {
-                        "lectureId": "lecture3",
-                        "lectureTitle": "Introduction to Matplotlib",
-                        "lectureDuration": 20,
-                        "lectureUrl": "https://youtu.be/samplelink3",
-                        "isPreviewFree": true,
-                        "lectureOrder": 1
-                    },
-                    {
-                        "lectureId": "lecture4",
-                        "lectureTitle": "Advanced Visualizations with Seaborn",
-                        "lectureDuration": 25,
-                        "lectureUrl": "https://youtu.be/samplelink4",
-                        "isPreviewFree": false,
-                        "lectureOrder": 2
-                    }
-                ]
-            }
-        ],
-        "educator": "675ac1512100b91a6d9b8b24",
-        "enrolledStudents": [
-            "user_2qjlgkAqIMpiR2flWIRzvWKtE0w",
-            "user_2qQlvXyr02B4Bq6hT0Gvaa5fT9V",
-            "user_2qjlgkAqIMpiR2flWIRzvWKtE0w"
-        ],
-        "courseRatings": [
-            {
-                "userId": "user_2qjlgkAqIMpiR2flWIRzvWKtE0w",
-                "rating": 5,
-                "_id": "6773acf160cb0ab974342248"
-            }
-        ],
-        "createdAt": "2024-12-27T10:00:00.000Z",
-        "updatedAt": "2024-12-31T09:57:48.992Z",
-        "__v": 3,
-        "courseThumbnail": "https://img.youtube.com/vi/E4znbZgUWzA/maxresdefault.jpg"
-    },
-    {
-        "_id": "605c72efb3f1c2b1f8e4e1aa",
-        "courseTitle": "Data Science and Machine Learning",
-        "courseDescription": "<h2>Unlock the Power of Data</h2><p>This course provides a comprehensive introduction to data science and machine learning. You will learn how to analyze data, build predictive models, and apply machine learning algorithms to real-world problems.</p><p>By the end of this course, you will have a solid understanding of data manipulation, visualization, and machine learning techniques, enabling you to make data-driven decisions.</p><ul><li>Understand data analysis and visualization</li><li>Learn machine learning algorithms and their applications</li><li>Work with popular data science libraries like Pandas and Scikit-Learn</li></ul>",
-        "coursePrice": 89.99,
-        "isPublished": true,
-        "discount": 30,
-        "courseContent": [
-            {
-                "chapterId": "chapter1",
-                "chapterOrder": 1,
-                "chapterTitle": "Introduction to Data Science",
-                "chapterContent": [
-                    {
-                        "lectureId": "lecture1",
-                        "lectureTitle": "What is Data Science?",
-                        "lectureDuration": 600,
-                        "lectureUrl": "https://youtu.be/-HeadgoqJ7A",
-                        "isPreviewFree": true,
-                        "lectureOrder": 1
-                    },
-                    {
-                        "lectureId": "lecture2",
-                        "lectureTitle": "Data Collection and Cleaning",
-                        "lectureDuration": 720,
-                        "lectureUrl": "https://youtu.be/-HeadgoqJ7A",
-                        "isPreviewFree": false,
-                        "lectureOrder": 2
-                    }
-                ]
-            },
-            {
-                "chapterId": "chapter2",
-                "chapterOrder": 2,
-                "chapterTitle": "Machine Learning Basics",
-                "chapterContent": [
-                    {
-                        "lectureId": "lecture3",
-                        "lectureTitle": "Supervised vs Unsupervised Learning",
-                        "lectureDuration": 800,
-                        "lectureUrl": "https://youtu.be/-HeadgoqJ7A",
-                        "isPreviewFree": true,
-                        "lectureOrder": 1
-                    },
-                    {
-                        "lectureId": "lecture4",
-                        "lectureTitle": "Building Your First Model",
-                        "lectureDuration": 850,
-                        "lectureUrl": "https://youtu.be/-HeadgoqJ7A",
-                        "isPreviewFree": false,
-                        "lectureOrder": 2
-                    }
-                ]
-            }
-        ],
-        "educator": "675ac1512100b91a6d9b8b24",
-        "enrolledStudents": [
-            "user_2qjlgkAqIMpiR2flWIRzvWKtE0w"
-        ],
-        "courseRatings": [],
-        "createdAt": "2024-12-17T08:16:53.622Z",
-        "updatedAt": "2025-01-02T06:53:59.753Z",
-        "__v": 1,
-        "courseThumbnail": "https://img.youtube.com/vi/631lFJdQvoo/maxresdefault.jpg"
-    },
-    {
-        "_id": "605c72efb3f1c2b1f8e4e1ab",
-        "courseTitle": "Introduction to Cybersecurity",
-        "courseDescription": "<h2>Protect the Digital World</h2><p>This course covers the essentials of cybersecurity, including understanding threats, vulnerabilities, and how to secure systems against cyber-attacks. Ideal for beginners, this course will prepare you for a career in cybersecurity.</p><p>By the end of this course, you will be able to identify and mitigate risks, implement security best practices, and understand the fundamentals of encryption and network security.</p><ul><li>Understand common cybersecurity threats</li><li>Learn about encryption and secure communication</li><li>Explore tools for penetration testing</li></ul>",
+        "_id": "605c72efb3f1c2b1f8e4e1a2",
+        "courseTitle": "Pre-Marital Counseling: Preparing for a Lifetime Together",
+        "courseDescription": "<h2>Set Your Marriage Up for Success</h2><p>Marriage is a lifelong commitment that requires preparation. This course provides couples with tools to navigate their future together, from communication to financial planning.</p><p>By the end of this course, you and your partner will be better equipped to handle challenges and build a fulfilling marriage.</p><ul><li>Understand key marital expectations</li><li>Develop strategies for handling conflict</li><li>Discuss financial and family planning</li></ul>",
         "coursePrice": 59.99,
         "isPublished": true,
         "discount": 15,
@@ -703,21 +296,21 @@ export const dummyCourses = [
             {
                 "chapterId": "chapter1",
                 "chapterOrder": 1,
-                "chapterTitle": "Cybersecurity Basics",
+                "chapterTitle": "Building a Marriage on Strong Foundations",
                 "chapterContent": [
                     {
                         "lectureId": "lecture1",
-                        "lectureTitle": "Introduction to Cybersecurity",
-                        "lectureDuration": 700,
-                        "lectureUrl": "https://youtu.be/-HeadgoqJ7A",
+                        "lectureTitle": "Understanding Your Partner’s Expectations",
+                        "lectureDuration": 14,
+                        "lectureUrl": "https://youtu.be/someurl",
                         "isPreviewFree": true,
                         "lectureOrder": 1
                     },
                     {
                         "lectureId": "lecture2",
-                        "lectureTitle": "Understanding Cyber Threats",
-                        "lectureDuration": 750,
-                        "lectureUrl": "https://youtu.be/-HeadgoqJ7A",
+                        "lectureTitle": "Creating a Shared Vision for the Future",
+                        "lectureDuration": 18,
+                        "lectureUrl": "https://youtu.be/someurl2",
                         "isPreviewFree": false,
                         "lectureOrder": 2
                     }
@@ -726,21 +319,21 @@ export const dummyCourses = [
             {
                 "chapterId": "chapter2",
                 "chapterOrder": 2,
-                "chapterTitle": "Network Security Fundamentals",
+                "chapterTitle": "Financial Planning and Conflict Resolution",
                 "chapterContent": [
                     {
                         "lectureId": "lecture3",
-                        "lectureTitle": "Securing Networks",
-                        "lectureDuration": 800,
-                        "lectureUrl": "https://youtu.be/-HeadgoqJ7A",
+                        "lectureTitle": "Managing Finances as a Team",
+                        "lectureDuration": 22,
+                        "lectureUrl": "https://youtu.be/someurl3",
                         "isPreviewFree": true,
                         "lectureOrder": 1
                     },
                     {
                         "lectureId": "lecture4",
-                        "lectureTitle": "Firewalls and VPNs",
-                        "lectureDuration": 850,
-                        "lectureUrl": "https://youtu.be/-HeadgoqJ7A",
+                        "lectureTitle": "Resolving Disputes with Love & Respect",
+                        "lectureDuration": 17,
+                        "lectureUrl": "https://youtu.be/someurl4",
                         "isPreviewFree": false,
                         "lectureOrder": 2
                     }
@@ -749,12 +342,532 @@ export const dummyCourses = [
         ],
         "educator": "675ac1512100b91a6d9b8b24",
         "enrolledStudents": [
-            "user_2qjlgkAqIMpiR2flWIRzvWKtE0w"
+            "user_1jkhjQlvXyr02B4Bq6hT0Gvaa5fT9V",
+            "user_3kljgkAqIMpiR2flWIRzvWKtE0w"
         ],
+        "courseRatings": [
+            {
+                "userId": "user_3kljgkAqIMpiR2flWIRzvWKtE0w",
+                "rating": 4.5,
+                "_id": "6773e37360cb0ab974342315"
+            }
+        ],
+        "createdAt": "2024-12-17T08:16:53.622Z",
+        "updatedAt": "2025-01-02T04:47:44.701Z",
+        "__v": 4,
+        "courseThumbnail": "https://img.youtube.com/vi/LcTBdemn-y0/maxresdefault.jpg"
+    },
+    {
+        "_id": "605c72efb3f1c2b1f8e4e1a3",
+        "courseTitle": "Love Languages & Emotional Connection",
+        "courseDescription": "<h2>Speak Your Partner’s Love Language</h2><p>Every individual expresses and receives love differently. This course helps couples understand the five love languages and how to apply them for deeper emotional intimacy.</p><p>By the end of this course, you and your partner will be able to identify each other's love languages and improve emotional expression.</p><ul><li>Identify your and your partner's love language</li><li>Improve emotional expression</li><li>Strengthen intimacy and connection</li></ul>",
+        "coursePrice": 45.00,
+        "isPublished": true,
+        "discount": 10,
+        "courseContent": [
+            {
+                "chapterId": "chapter1",
+                "chapterOrder": 1,
+                "chapterTitle": "Discovering Your Love Language",
+                "chapterContent": [
+                    {
+                        "lectureId": "lecture1",
+                        "lectureTitle": "Understanding the Five Love Languages",
+                        "lectureDuration": 15,
+                        "lectureUrl": "https://www.youtube.com/watch?v=cbqM5ITIy8s",
+                        "isPreviewFree": true,
+                        "lectureOrder": 1
+                    },
+                    {
+                        "lectureId": "lecture2",
+                        "lectureTitle": "Expressing Love in Meaningful Ways",
+                        "lectureDuration": 18,
+                        "lectureUrl": "https://www.youtube.com/watch?v=eF8fsqRkwtY",
+                        "isPreviewFree": false,
+                        "lectureOrder": 2
+                    }
+                ]
+            },
+            {
+                "chapterId": "chapter2",
+                "chapterOrder": 2,
+                "chapterTitle": "Strengthening Emotional Connection",
+                "chapterContent": [
+                    {
+                        "lectureId": "lecture3",
+                        "lectureTitle": "Deepening Emotional Intimacy",
+                        "lectureDuration": 20,
+                        "lectureUrl": "https://www.youtube.com/watch?v=vuemQQ6-2SE",
+                        "isPreviewFree": true,
+                        "lectureOrder": 1
+                    },
+                    {
+                        "lectureId": "lecture4",
+                        "lectureTitle": "Applying Love Languages Daily",
+                        "lectureDuration": 12,
+                        "lectureUrl": "https://www.youtube.com/watch?v=whxbov1wpa4",
+                        "isPreviewFree": false,
+                        "lectureOrder": 2
+                    }
+                ]
+            }
+        ],
+        "educator": "675ac1512100b91a6d9b8b24",
+        "enrolledStudents": [],
         "courseRatings": [],
         "createdAt": "2024-12-17T08:16:53.622Z",
-        "updatedAt": "2025-01-02T06:56:13.208Z",
-        "__v": 1,
-        "courseThumbnail": "https://img.youtube.com/vi/WbV3zRgpw_E/maxresdefault.jpg"
+        "updatedAt": "2025-01-02T04:47:44.701Z",
+        "__v": 4,
+        "courseThumbnail": "https://img.youtube.com/vi/iJ0NZrEaaQo/maxresdefault.jpg"
+    },
+
+    {
+        "_id": "605c72efb3f1c2b1f8e4e1a4",
+        "courseTitle": "Conflict Resolution for Couples",
+        "courseDescription": "<h2>Handle Disagreements with Love</h2><p>Conflicts are inevitable in any relationship, but they don’t have to lead to disconnect. This course teaches couples how to handle disputes with respect and understanding.</p><p>By the end of this course, you and your partner will be able to turn conflicts into opportunities for growth and deeper connection.</p><ul><li>Learn healthy conflict resolution techniques</li><li>Turn disagreements into productive conversations</li><li>Strengthen mutual understanding and respect</li></ul>",
+        "coursePrice": 55.00,
+        "isPublished": true,
+        "discount": 12,
+        "courseContent": [
+            {
+                "chapterId": "chapter1",
+                "chapterOrder": 1,
+                "chapterTitle": "The Art of Healthy Conflict Resolution",
+                "chapterContent": [
+                    {
+                        "lectureId": "lecture1",
+                        "lectureTitle": "Why Conflicts Happen in Relationships",
+                        "lectureDuration": 20,
+                        "lectureUrl": "https://youtu.be/someurl7",
+                        "isPreviewFree": true,
+                        "lectureOrder": 1
+                    },
+                    {
+                        "lectureId": "lecture2",
+                        "lectureTitle": "Effective Listening in Arguments",
+                        "lectureDuration": 18,
+                        "lectureUrl": "https://youtu.be/someurl8",
+                        "isPreviewFree": false,
+                        "lectureOrder": 2
+                    }
+                ]
+            },
+            {
+                "chapterId": "chapter2",
+                "chapterOrder": 2,
+                "chapterTitle": "Turning Conflicts into Growth",
+                "chapterContent": [
+                    {
+                        "lectureId": "lecture3",
+                        "lectureTitle": "Building a Culture of Understanding",
+                        "lectureDuration": 22,
+                        "lectureUrl": "https://youtu.be/someurl9",
+                        "isPreviewFree": true,
+                        "lectureOrder": 1
+                    },
+                    {
+                        "lectureId": "lecture4",
+                        "lectureTitle": "Techniques for De-escalating Tension",
+                        "lectureDuration": 17,
+                        "lectureUrl": "https://youtu.be/someurl10",
+                        "isPreviewFree": false,
+                        "lectureOrder": 2
+                    }
+                ]
+            }
+        ],
+        "educator": "675ac1512100b91a6d9b8b24",
+        "enrolledStudents": [],
+        "courseRatings": [],
+        "createdAt": "2024-12-17T08:16:53.622Z",
+        "updatedAt": "2025-01-02T04:47:44.701Z",
+        "__v": 4,
+        "courseThumbnail": "https://img.youtube.com/vi/nAxZ0efK8W0/maxresdefault.jpg"
+    },
+    {
+        "_id": "605c72efb3f1c2b1f8e4e1a5",
+        "courseTitle": "Rekindling Romance & Intimacy",
+        "courseDescription": "<h2>Bring Back the Spark</h2><p>Over time, relationships evolve, and couples may find themselves feeling distant. This course provides strategies to revive passion and closeness.</p><p>By the end of this course, you and your partner will have practical techniques to keep the romance alive and maintain emotional and physical intimacy.</p><ul><li>Rediscover emotional and physical intimacy</li><li>Learn techniques to reignite passion</li><li>Deepen your connection through meaningful gestures</li></ul>",
+        "coursePrice": 60.00,
+        "isPublished": true,
+        "discount": 18,
+        "courseContent": [
+            {
+                "chapterId": "chapter1",
+                "chapterOrder": 1,
+                "chapterTitle": "The Science of Love & Intimacy",
+                "chapterContent": [
+                    {
+                        "lectureId": "lecture1",
+                        "lectureTitle": "Why Romance Fades and How to Revive It",
+                        "lectureDuration": 22,
+                        "lectureUrl": "https://youtu.be/someurl11",
+                        "isPreviewFree": true,
+                        "lectureOrder": 1
+                    },
+                    {
+                        "lectureId": "lecture2",
+                        "lectureTitle": "Rekindling Emotional Connection",
+                        "lectureDuration": 19,
+                        "lectureUrl": "https://youtu.be/someurl12",
+                        "isPreviewFree": false,
+                        "lectureOrder": 2
+                    }
+                ]
+            },
+            {
+                "chapterId": "chapter2",
+                "chapterOrder": 2,
+                "chapterTitle": "Physical & Emotional Intimacy",
+                "chapterContent": [
+                    {
+                        "lectureId": "lecture3",
+                        "lectureTitle": "Building a Habit of Affection",
+                        "lectureDuration": 20,
+                        "lectureUrl": "https://youtu.be/someurl13",
+                        "isPreviewFree": true,
+                        "lectureOrder": 1
+                    },
+                    {
+                        "lectureId": "lecture4",
+                        "lectureTitle": "The Role of Small Acts of Love",
+                        "lectureDuration": 16,
+                        "lectureUrl": "https://youtu.be/someurl14",
+                        "isPreviewFree": false,
+                        "lectureOrder": 2
+                    }
+                ]
+            }
+        ],
+        "educator": "675ac1512100b91a6d9b8b24",
+        "enrolledStudents": [],
+        "courseRatings": [],
+        "createdAt": "2024-12-17T08:16:53.622Z",
+        "updatedAt": "2025-01-02T04:47:44.701Z",
+        "__v": 4,
+        "courseThumbnail": "https://img.youtube.com/vi/C-UVxH19tb4/maxresdefault.jpg"
+    },
+
+    {
+        "_id": "605c72efb3f1c2b1f8e4e1a6",
+        "courseTitle": "Parenting as a Team: Raising Kids Together",
+        "courseDescription": "<h2>Strengthening Your Relationship While Parenting</h2><p>Parenting can be a rewarding but challenging journey. This course helps couples align their parenting styles, improve communication, and support each other while raising children.</p><p>By the end of this course, you and your partner will have the tools to co-parent effectively while maintaining a strong and loving relationship.</p><ul><li>Align parenting philosophies and approaches</li><li>Improve teamwork in raising children</li><li>Maintain intimacy while managing parenting responsibilities</li></ul>",
+        "coursePrice": 65.00,
+        "isPublished": true,
+        "discount": 15,
+        "courseContent": [
+            {
+                "chapterId": "chapter1",
+                "chapterOrder": 1,
+                "chapterTitle": "Building a United Parenting Front",
+                "chapterContent": [
+                    {
+                        "lectureId": "lecture1",
+                        "lectureTitle": "Understanding Each Other’s Parenting Styles",
+                        "lectureDuration": 21,
+                        "lectureUrl": "https://youtu.be/someurl15",
+                        "isPreviewFree": true,
+                        "lectureOrder": 1
+                    },
+                    {
+                        "lectureId": "lecture2",
+                        "lectureTitle": "Balancing Discipline and Affection",
+                        "lectureDuration": 18,
+                        "lectureUrl": "https://youtu.be/someurl16",
+                        "isPreviewFree": false,
+                        "lectureOrder": 2
+                    }
+                ]
+            },
+            {
+                "chapterId": "chapter2",
+                "chapterOrder": 2,
+                "chapterTitle": "Keeping Your Relationship Strong While Parenting",
+                "chapterContent": [
+                    {
+                        "lectureId": "lecture3",
+                        "lectureTitle": "Making Time for Each Other Amid Parenting",
+                        "lectureDuration": 22,
+                        "lectureUrl": "https://youtu.be/someurl17",
+                        "isPreviewFree": true,
+                        "lectureOrder": 1
+                    },
+                    {
+                        "lectureId": "lecture4",
+                        "lectureTitle": "How to Support Each Other as Parents",
+                        "lectureDuration": 17,
+                        "lectureUrl": "https://youtu.be/someurl18",
+                        "isPreviewFree": false,
+                        "lectureOrder": 2
+                    }
+                ]
+            }
+        ],
+        "educator": "675ac1512100b91a6d9b8b24",
+        "enrolledStudents": [],
+        "courseRatings": [],
+        "createdAt": "2024-12-17T08:16:53.622Z",
+        "updatedAt": "2025-01-02T04:47:44.701Z",
+        "__v": 4,
+        "courseThumbnail": "https://img.youtube.com/vi/cbqM5ITIy8s/maxresdefault.jpg"
+    },
+    {
+        "_id": "605c72efb3f1c2b1f8e4e1a7",
+        "courseTitle": "Healing from Betrayal & Rebuilding Trust",
+        "courseDescription": "<h2>Rebuilding Trust and Moving Forward</h2><p>Trust is the foundation of any relationship. If you've experienced betrayal or infidelity, this course provides step-by-step guidance on rebuilding trust and healing together.</p><p>By the end of this course, you and your partner will understand how to restore trust and strengthen your relationship after a breach of faith.</p><ul><li>Learn the psychology behind betrayal</li><li>Develop effective trust-building strategies</li><li>Communicate openly to heal emotional wounds</li></ul>",
+        "coursePrice": 70.00,
+        "isPublished": true,
+        "discount": 20,
+        "courseContent": [
+            {
+                "chapterId": "chapter1",
+                "chapterOrder": 1,
+                "chapterTitle": "Understanding Betrayal and Emotional Healing",
+                "chapterContent": [
+                    {
+                        "lectureId": "lecture1",
+                        "lectureTitle": "Why Betrayal Hurts and How to Process It",
+                        "lectureDuration": 23,
+                        "lectureUrl": "https://youtu.be/someurl19",
+                        "isPreviewFree": true,
+                        "lectureOrder": 1
+                    },
+                    {
+                        "lectureId": "lecture2",
+                        "lectureTitle": "The First Steps to Emotional Healing",
+                        "lectureDuration": 19,
+                        "lectureUrl": "https://youtu.be/someurl20",
+                        "isPreviewFree": false,
+                        "lectureOrder": 2
+                    }
+                ]
+            },
+            {
+                "chapterId": "chapter2",
+                "chapterOrder": 2,
+                "chapterTitle": "Restoring Trust and Rebuilding Your Relationship",
+                "chapterContent": [
+                    {
+                        "lectureId": "lecture3",
+                        "lectureTitle": "Communicating Openly After Betrayal",
+                        "lectureDuration": 22,
+                        "lectureUrl": "https://youtu.be/someurl21",
+                        "isPreviewFree": true,
+                        "lectureOrder": 1
+                    },
+                    {
+                        "lectureId": "lecture4",
+                        "lectureTitle": "Practical Steps to Strengthen Trust Again",
+                        "lectureDuration": 17,
+                        "lectureUrl": "https://youtu.be/someurl22",
+                        "isPreviewFree": false,
+                        "lectureOrder": 2
+                    }
+                ]
+            }
+        ],
+        "educator": "675ac1512100b91a6d9b8b24",
+        "enrolledStudents": [],
+        "courseRatings": [],
+        "createdAt": "2024-12-17T08:16:53.622Z",
+        "updatedAt": "2025-01-02T04:47:44.701Z",
+        "__v": 4,
+        "courseThumbnail": "https://img.youtube.com/vi/eF8fsqRkwtY/maxresdefault.jpg"
+    },
+
+    {
+        "_id": "605c72efb3f1c2b1f8e4e1a8",
+        "courseTitle": "Managing Finances as a Couple",
+        "courseDescription": "<h2>Building Financial Harmony Together</h2><p>Money matters can be a major source of conflict in relationships. This course helps couples develop healthy financial habits, set joint goals, and manage money effectively.</p><p>By the end of this course, you and your partner will have the tools to navigate financial discussions and create a stable financial future together.</p><ul><li>Develop a shared financial vision</li><li>Learn budgeting and expense tracking techniques</li><li>Manage financial conflicts with healthy communication</li></ul>",
+        "coursePrice": 75.00,
+        "isPublished": true,
+        "discount": 15,
+        "courseContent": [
+            {
+                "chapterId": "chapter1",
+                "chapterOrder": 1,
+                "chapterTitle": "Creating a Financially Stable Relationship",
+                "chapterContent": [
+                    {
+                        "lectureId": "lecture1",
+                        "lectureTitle": "Understanding Each Other’s Money Mindset",
+                        "lectureDuration": 25,
+                        "lectureUrl": "https://youtu.be/someurl23",
+                        "isPreviewFree": true,
+                        "lectureOrder": 1
+                    },
+                    {
+                        "lectureId": "lecture2",
+                        "lectureTitle": "Building a Budget That Works for Both of You",
+                        "lectureDuration": 20,
+                        "lectureUrl": "https://youtu.be/someurl24",
+                        "isPreviewFree": false,
+                        "lectureOrder": 2
+                    }
+                ]
+            },
+            {
+                "chapterId": "chapter2",
+                "chapterOrder": 2,
+                "chapterTitle": "Resolving Money Conflicts in Relationships",
+                "chapterContent": [
+                    {
+                        "lectureId": "lecture3",
+                        "lectureTitle": "How to Discuss Finances Without Arguing",
+                        "lectureDuration": 22,
+                        "lectureUrl": "https://youtu.be/someurl25",
+                        "isPreviewFree": true,
+                        "lectureOrder": 1
+                    },
+                    {
+                        "lectureId": "lecture4",
+                        "lectureTitle": "Planning for Long-Term Financial Success",
+                        "lectureDuration": 18,
+                        "lectureUrl": "https://youtu.be/someurl26",
+                        "isPreviewFree": false,
+                        "lectureOrder": 2
+                    }
+                ]
+            }
+        ],
+        "educator": "675ac1512100b91a6d9b8b24",
+        "enrolledStudents": [],
+        "courseRatings": [],
+        "createdAt": "2024-12-17T08:16:53.622Z",
+        "updatedAt": "2025-01-02T04:47:44.701Z",
+        "__v": 4,
+        "courseThumbnail": "https://img.youtube.com/vi/vuemQQ6-2SE/maxresdefault.jpg"
+    },
+
+    {
+        "_id": "605c72efb3f1c2b1f8e4e1a9",
+        "courseTitle": "Marriage Tune-Up: Strengthening Your Bond",
+        "courseDescription": "<h2>Keep Your Relationship Thriving</h2><p>Every marriage needs care and attention to stay strong. This course provides couples with strategies to refresh their connection, address minor concerns before they become major, and keep their relationship healthy.</p><p>By the end of this course, you and your partner will have a renewed sense of connection and practical tools to maintain a happy and fulfilling marriage.</p><ul><li>Identify areas of growth in your relationship</li><li>Improve day-to-day communication and intimacy</li><li>Set goals for a long-lasting, loving partnership</li></ul>",
+        "coursePrice": 68.00,
+        "isPublished": true,
+        "discount": 18,
+        "courseContent": [
+            {
+                "chapterId": "chapter1",
+                "chapterOrder": 1,
+                "chapterTitle": "Refreshing Your Marriage",
+                "chapterContent": [
+                    {
+                        "lectureId": "lecture1",
+                        "lectureTitle": "How to Reconnect Emotionally",
+                        "lectureDuration": 24,
+                        "lectureUrl": "https://youtu.be/someurl27",
+                        "isPreviewFree": true,
+                        "lectureOrder": 1
+                    },
+                    {
+                        "lectureId": "lecture2",
+                        "lectureTitle": "Practicing Gratitude and Appreciation",
+                        "lectureDuration": 19,
+                        "lectureUrl": "https://youtu.be/someurl28",
+                        "isPreviewFree": false,
+                        "lectureOrder": 2
+                    }
+                ]
+            },
+            {
+                "chapterId": "chapter2",
+                "chapterOrder": 2,
+                "chapterTitle": "Keeping the Romance Alive",
+                "chapterContent": [
+                    {
+                        "lectureId": "lecture3",
+                        "lectureTitle": "Daily Habits for a Stronger Marriage",
+                        "lectureDuration": 22,
+                        "lectureUrl": "https://youtu.be/someurl29",
+                        "isPreviewFree": true,
+                        "lectureOrder": 1
+                    },
+                    {
+                        "lectureId": "lecture4",
+                        "lectureTitle": "Planning for Long-Term Relationship Success",
+                        "lectureDuration": 18,
+                        "lectureUrl": "https://youtu.be/someurl30",
+                        "isPreviewFree": false,
+                        "lectureOrder": 2
+                    }
+                ]
+            }
+        ],
+        "educator": "675ac1512100b91a6d9b8b24",
+        "enrolledStudents": [],
+        "courseRatings": [],
+        "createdAt": "2024-12-17T08:16:53.622Z",
+        "updatedAt": "2025-01-02T04:47:44.701Z",
+        "__v": 4,
+        "courseThumbnail": "https://img.youtube.com/vi/whxbov1wpa4/maxresdefault.jpg"
+    },
+
+    {
+        "_id": "605c72efb3f1c2b1f8e4e1b0",
+        "courseTitle": "Navigating Long-Distance Relationships",
+        "courseDescription": "<h2>Stay Connected, No Matter the Distance</h2><p>Whether you're temporarily apart or in a long-term distance relationship, this course provides strategies for maintaining closeness, improving communication, and overcoming challenges while being miles away.</p><p>By the end of this course, you and your partner will have practical tools to keep your relationship strong despite the distance.</p><ul><li>Improve virtual and emotional communication</li><li>Maintain intimacy in a long-distance setup</li><li>Plan for a future together while apart</li></ul>",
+        "coursePrice": 65.00,
+        "isPublished": true,
+        "discount": 15,
+        "courseContent": [
+            {
+                "chapterId": "chapter1",
+                "chapterOrder": 1,
+                "chapterTitle": "Understanding Long-Distance Relationship Challenges",
+                "chapterContent": [
+                    {
+                        "lectureId": "lecture1",
+                        "lectureTitle": "Why Long-Distance Relationships Can Be Difficult",
+                        "lectureDuration": 20,
+                        "lectureUrl": "https://youtu.be/someurl31",
+                        "isPreviewFree": true,
+                        "lectureOrder": 1
+                    },
+                    {
+                        "lectureId": "lecture2",
+                        "lectureTitle": "Setting Expectations and Boundaries",
+                        "lectureDuration": 18,
+                        "lectureUrl": "https://youtu.be/someurl32",
+                        "isPreviewFree": false,
+                        "lectureOrder": 2
+                    }
+                ]
+            },
+            {
+                "chapterId": "chapter2",
+                "chapterOrder": 2,
+                "chapterTitle": "Keeping the Connection Strong",
+                "chapterContent": [
+                    {
+                        "lectureId": "lecture3",
+                        "lectureTitle": "Creative Ways to Stay Emotionally Close",
+                        "lectureDuration": 22,
+                        "lectureUrl": "https://youtu.be/someurl33",
+                        "isPreviewFree": true,
+                        "lectureOrder": 1
+                    },
+                    {
+                        "lectureId": "lecture4",
+                        "lectureTitle": "Planning for the Future and Reunion",
+                        "lectureDuration": 17,
+                        "lectureUrl": "https://youtu.be/someurl34",
+                        "isPreviewFree": false,
+                        "lectureOrder": 2
+                    }
+                ]
+            }
+        ],
+        "educator": "675ac1512100b91a6d9b8b24",
+        "enrolledStudents": [],
+        "courseRatings": [],
+        "createdAt": "2024-12-17T08:16:53.622Z",
+        "updatedAt": "2025-01-02T04:47:44.701Z",
+        "__v": 4,
+        "courseThumbnail": "https://img.youtube.com/vi/u6sUSVfjFGc/maxresdefault.jpg"
     }
-]
+
+
+
+
+];
