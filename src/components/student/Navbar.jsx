@@ -24,12 +24,13 @@ const Navbar = () => {
       <img onClick={()=> navigate('/')} src={assets.logo} alt="Logo" className='w-28 lg:w-32 cursor-pointer' />
       <div className="hidden md:flex items-center gap-5 text-gray-500">
           <div className="flex items-center gap-5">
-            { role === "admin" &&
+            { //role === "admin" &&  
+            }
               <div className="text-secondary">
               <button onClick={()=>{navigate('/educator')}}>{ isEducator ? 'Counselor Dashboard' : 'Become Counsellor'}</button>
               | <Link to='/my-enrollments'> My Enrollments</Link>
               </div>
-            }
+          
           </div>
               {
                 role ? (<button onClick={()=> logoutHandler()} className="bg-secondary text-white px-5 py-2 rounded-full cursor-pointer">Logout</button>) :
@@ -40,16 +41,16 @@ const Navbar = () => {
       {/* for mobile screens */}
       <div className="md:hidden flex items-center gap-2 sm:gap5 text-gray-500">
          <div className="flex items-center gap-1 sm:gap-2 max-sm:text-xs">
-            { user &&
+            
               <>
               <button onClick={()=>{navigate('/educator')}}>{ isEducator ? 'Counselor Dashboard' : 'Become Counsellor'}</button>
               | <Link to='/my-enrollments'> My Enrollments</Link>
               </>
-            }
+           
          </div>
 
             {
-              user ? <UserButton/> : <button onClick={()=> navigate('/auth')}><img src={assets.user_icon} alt=""/></button>
+            <button onClick={()=> navigate('/auth')}><img src={assets.user_icon} alt=""/></button>
             }
          
       </div>
