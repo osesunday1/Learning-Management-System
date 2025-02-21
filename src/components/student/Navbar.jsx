@@ -34,7 +34,7 @@ const Navbar = () => {
           </div>
               {
                 role ? (<button onClick={()=> logoutHandler()} className="bg-secondary text-white px-5 py-2 rounded-full cursor-pointer">Logout</button>) :
-                (<button onClick={()=> navigate('/auth')} className="bg-secondary text-white px-5 py-2 rounded-full cursor-pointer">Create Account</button>)
+                (<button onClick={()=> navigate('/auth')} className="bg-secondary-200 text-white px-5 py-2 rounded-full cursor-pointer">Create Account</button>)
               }
       </div>
 
