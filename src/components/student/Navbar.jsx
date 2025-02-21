@@ -49,7 +49,7 @@ const Navbar = () => {
          </div>
 
             {
-              user ? <UserButton/> : <button onClick={()=> openSignIn()}><img src={assets.user_icon} alt=""/></button>
+              user ? <UserButton/> : <button onClick={()=> navigate('/auth')}><img src={assets.user_icon} alt=""/></button>
             }
          
       </div>
