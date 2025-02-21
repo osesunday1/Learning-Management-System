@@ -40,7 +40,7 @@ const Navbar = () => {
 
       {/* for mobile screens */}
       <div className="md:hidden flex items-center gap-2 sm:gap5 text-gray-500">
-         <div className="flex items-center gap-1 sm:gap-2 max-sm:text-xs">
+         <div className="flex items-center gap-1 sm:gap-2 max-sm:text-xs text-secondary">
             
               <>
               <button onClick={()=>{navigate('/educator')}}>{ isEducator ? 'Counselor Dashboard' : 'Become Counsellor'}</button>
