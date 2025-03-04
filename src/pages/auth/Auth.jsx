@@ -1,6 +1,7 @@
 import React, { useContext, useState } from "react";
 import styled from "styled-components";
 import { AppContext } from "../../context/AppContext";
+import axios from "axios";
 
 
 
@@ -8,9 +9,15 @@ const Auth = () => {
   const [isLogin, setIsLogin] = useState(false);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
+  const [name, setName] = useState("");
+
+
   const {navigate} = useContext(AppContext)
 
+  const apiUrl = import.meta.env.VITE_BACKEND_URL;
 
+    //Login Handler
     const loginHandler = async () => {
       const apiUrl = import.meta.env.VITE_BACKEND_URL;
       const response = await fetch(`${apiUrl}/auth/login`, {
@@ -28,7 +35,44 @@ const Auth = () => {
         alert("Invalid login credentials");
       }
     };
-  
+
+
+// Signup Handler
+const signupHandler = async () => {
+  if (password !== confirmPassword) {
+    alert("Passwords do not match!");
+    return;
+  }
+
+  try {
+    const response = await fetch(`${apiUrl}/auth/signup`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ name, email, password, passwordConfirm: confirmPassword }),
+    });
+
+    // ✅ Check if API request was successful
+    if (!response.ok) {
+      const errorData = await response.json();
+      throw new Error(errorData.message || "Signup failed.");
+    }
+
+    const data = await response.json(); // ✅ Correct data extraction
+
+    console.log(data);
+
+    if (data.token) {
+      localStorage.setItem("token", data.token);
+      localStorage.setItem("role", data.data.user.role); // ✅ Fixed incorrect path
+
+      navigate('/my-enrollments');
+    } else {
+      alert(data.message || "Signup failed. Please try again.");
+    }
+  } catch (error) {
+    alert(`Error signing up. ${error.message}`);
+  }
+};
 
 
   function loginSwitch(){
@@ -41,11 +85,11 @@ const Auth = () => {
 
         <SUpForm className="bg-primary-100">
           <Label onClick={loginSwitch} $isLogin={isLogin}>Sign Up</Label>
-          <Input type="text" placeholder="Full Name" required />
-          <Input type="email" placeholder="Email" required />
-          <Input type="password" placeholder="Password" required />
-          <Input type="password" placeholder="Repeat Password" required />
-          <Button>Sign Up</Button>
+          <Input type="text" placeholder="Full Name" required onChange={(e) => setName(e.target.value)} />
+            <Input type="email" placeholder="Email" required onChange={(e) => setEmail(e.target.value)} />
+            <Input type="password" placeholder="Password" required onChange={(e) => setPassword(e.target.value)} />
+            <Input type="password" placeholder="Repeat Password" required onChange={(e) => setConfirmPassword(e.target.value)} />
+            <Button onClick={signupHandler}>Sign Up</Button>
         </SUpForm>
 
         <LForm $isLogin={isLogin}>
