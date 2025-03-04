@@ -30,7 +30,15 @@ const Auth = () => {
       if (data.token) {
         localStorage.setItem("token", data.token);
         localStorage.setItem("role", data.data.user.role);
-         navigate('/my-enrollments')
+        localStorage.setItem("userData", data.data.user);
+         
+         if (data.data.user.role === "student"){
+          navigate('/my-enrollments')
+         }
+         if (data.data.user.role === "educator"){
+          navigate('/educator')
+         }
+         
       } else {
         alert("Invalid login credentials");
       }
@@ -59,7 +67,7 @@ const signupHandler = async () => {
 
     const data = await response.json(); // ✅ Correct data extraction
 
-    console.log(data);
+    
 
     if (data.token) {
       localStorage.setItem("token", data.token);

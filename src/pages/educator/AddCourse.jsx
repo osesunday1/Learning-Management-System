@@ -1,196 +1,262 @@
-import uniqid from 'uniqid';
-import Quill from 'quill';
+import uniqid from "uniqid";
+import Quill from "quill";
 import "quill/dist/quill.snow.css";
-import { useRef } from 'react';
-import { useState } from 'react';
-import { useEffect } from 'react';
+import { useRef, useState, useEffect } from "react";
 import { assets } from "../../assets/assets";
 
 
-
 const AddCourse = () => {
+  const apiUrl = import.meta.env.VITE_BACKEND_URL;
 
-  const quillRef = useRef(null)
+
+  const quillRef = useRef(null);
   const editorRef = useRef(null);
 
-
-  const [courseTitle, setCourseTitle] = useState('');
+  const [courseTitle, setCourseTitle] = useState("");
   const [coursePrice, setCoursePrice] = useState(0);
   const [discount, setDiscount] = useState(0);
   const [image, setImage] = useState(null);
+  const [previewImage, setPreviewImage] = useState(null);
   const [chapters, setChapters] = useState([]);
   const [showPopup, setShowPopup] = useState(false);
   const [currentChapterId, setCurrentChapterId] = useState(null);
+  const [lectureDetails, setLectureDetails] = useState({
+    lectureTitle: "",
+    lectureDuration: "",
+    lectureUrl: "",
+    isPreviewFree: false,
+  });
+
   
-  const [lectureDetails, setLectureDetails] = useState(
-    {
-      lectureTitle: '',
-      lectureDuration: '',
-      lectureUrl: '',
-      isPreviewFree: false,
-    });
+  
+  
+  //const { postData, loading, error } = usePost(`${apiUrl}/educators/add-course`);
 
-    const handleChapter = (action, chapterId) => {
-      if (action === 'add') {
-        const title = prompt('Enter Chapter Name:');
-        if (title) {
-          const newChapter = {
-            chapterId: uniqid(),
-            chapterTitle: title,
-            chapterContent: [],
-            collapsed: false,
-            chapterOrder: chapters.length > 0 ? chapters.slice(-1)[0].chapterOrder + 1 : 1,
-          };
-          setChapters([...chapters, newChapter]);
-        }
-      } else if (action === 'remove') {
-        setChapters(chapters.filter((chapter) => chapter.chapterId !== chapterId));
-      } else if (action === 'toggle') {
-          setChapters(
-            chapters.map((chapter) =>
-              chapter.chapterId === chapterId
-                ? { ...chapter, collapsed: !chapter.collapsed }
-                : chapter
-            )
-          );
-        }
-      };
-
-
-      const handleLecture = (action, chapterId, lectureIndex) => {
-        if (action === 'add') {
-          setCurrentChapterId(chapterId);
-          setShowPopup(true);
-        } else if (action === 'remove') {
-          setChapters(
-            chapters.map((chapter) => {
-              if (chapter.chapterId === chapterId) {
-                chapter.chapterContent.splice(lectureIndex, 1);
-              }
-              return chapter;
-            })
-          );
-        }
-      };
-
-
-      const addLecture = () => {
-        setChapters(
-          chapters.map((chapter) => {
-            if (chapter.chapterId === currentChapterId) {
-              const newLecture = {
-                ...lectureDetails,
-                lectureOrder: chapter.chapterContent.length > 0
-                  ? chapter.chapterContent.slice(-1)[0].lectureOrder + 1
-                  : 1,
-                lectureId: uniqid(),
-              };
-      
-              // ✅ Create a new array instead of mutating `chapterContent`
-              return {
-                ...chapter,
-                chapterContent: [...chapter.chapterContent, newLecture],
-              };
-            }
-            return chapter;
-          })
-        );
-      
-        setShowPopup(false);
-        setLectureDetails({
-          lectureTitle: '',
-          lectureDuration: '',
-          lectureUrl: '',
-          isPreviewFree: false,
-                  });
-      };
-
-
-    const handleSubmit=async(e)=>{
-        e.preventDefault()
+  // ✅ Quill Initialization
+  useEffect(() => {
+    if (!quillRef.current && editorRef.current) {
+      quillRef.current = new Quill(editorRef.current, { theme: "snow" });
     }
+  }, []);
 
+  // ✅ Handle Image Preview & Cleanup
+  useEffect(() => {
+    if (image) {
+      const previewURL = URL.createObjectURL(image);
+      setPreviewImage(previewURL);
+      return () => URL.revokeObjectURL(previewURL);
+    }
+  }, [image]);
 
-    useEffect(() => {
-      //initiate quill only once
-      if (!quillRef.current && editorRef.current) {
-        quillRef.current = new Quill(editorRef.current, {
-          theme: 'snow',
-        });
+  // ✅ Handle Adding & Removing Chapters
+  const handleChapter = (action, chapterId) => {
+    if (action === "add") {
+      const title = prompt("Enter Chapter Name:");
+      if (title) {
+        const newChapter = {
+          chapterId: uniqid(),
+          chapterTitle: title,
+          chapterContent: [],
+          collapsed: false,
+          chapterOrder: chapters.length > 0 ? chapters[chapters.length - 1].chapterOrder + 1 : 1,
+        };
+        setChapters([...chapters, newChapter]);
       }
-    }, []);
+    } else if (action === "remove") {
+      setChapters(chapters.filter((chapter) => chapter.chapterId !== chapterId));
+    } else if (action === "toggle") {
+      setChapters(
+        chapters.map((chapter) =>
+          chapter.chapterId === chapterId ? { ...chapter, collapsed: !chapter.collapsed } : chapter
+        )
+      );
+    }
+  };
 
-    return (
-      <div className='h-screen overflow-scroll flex flex-col items-start justify-between md:p-8 md:pb-0 p-4 pt-8 pb-0'>
-        <form onSubmit={handleSubmit} className='flex flex-col gap-4 max-w-md w-full text-gray-500'>
+  // ✅ Handle Adding & Removing Lectures
+  const handleLecture = (action, chapterId, lectureIndex) => {
+    if (action === "add") {
+      setCurrentChapterId(chapterId);
+      setShowPopup(true);
+    } else if (action === "remove") {
+      setChapters(
+        chapters.map((chapter) => ({
+          ...chapter,
+          chapterContent: chapter.chapterContent.filter((_, index) => index !== lectureIndex),
+        }))
+      );
+    }
+  };
 
-          <div className='flex flex-col gap-1'>
-            <p>Course Title</p>
-            <input 
-              onChange={e => setCourseTitle(e.target.value)} 
-              value={courseTitle} 
-              type="text" 
-              placeholder='Type here' 
-              className='outline-none md:py-2.5 py-2 px-3 rounded border border-gray-500' 
-              required 
-            />
-          </div>
+  // ✅ Add Lecture to Chapter
+  const addLecture = () => {
+    setChapters(
+      chapters.map((chapter) =>
+        chapter.chapterId === currentChapterId
+          ? {
+              ...chapter,
+              chapterContent: [
+                ...chapter.chapterContent,
+                { ...lectureDetails, lectureOrder: chapter.chapterContent.length + 1, lectureId: uniqid() },
+              ],
+            }
+          : chapter
+      )
+    );
 
-          <div className='flex flex-col gap-1'>
-            <p>Course Description</p>
-            <div ref={editorRef}></div>
-          </div>
+    setShowPopup(false);
+    setLectureDetails({ lectureTitle: "", lectureDuration: "", lectureUrl: "", isPreviewFree: false });
+  };
 
-          <div className='flex items-center justify-between flex-wrap'>
+  //================================ ✅ Submit Course Data
+const handleSubmit = async (e) => {
+  e.preventDefault();
+
+  // ✅ Validate Required Fields
+  if (!courseTitle.trim()) {
+      alert("Course title is required.");
+      return;
+  }
+
+  if (!quillRef.current || !quillRef.current.root.innerHTML.trim()) {
+      alert("Course description is required.");
+      return;
+  }
+
+  if (!coursePrice || coursePrice < 0) {
+      alert("Course price must be a positive number.");
+      return;
+  }
+
+  if (discount < 0 || discount > coursePrice) {
+      alert("Discount must be between 0 and the course price.");
+      return;
+  }
+
+  if (!image) {
+      alert("Please upload a course thumbnail.");
+      return;
+  }
+
+  if (chapters.length === 0) {
+      alert("Please add at least one chapter.");
+      return;
+  }
+
+  // ✅ Prepare Course Data
+  const courseData = {
+      courseTitle,
+      courseDescription: quillRef.current.root.innerHTML, // ✅ Extracts Quill content
+      coursePrice,
+      discount,
+      courseContent: chapters,
+  };
+
+  // ✅ Create FormData for Backend Submission
+  const formData = new FormData();
+  formData.append("courseData", JSON.stringify(courseData)); // ✅ Convert object to JSON string
+  formData.append("image", image); // ✅ Append image file
+
+  try {
+      // ✅ Submit Course Data Using `fetch`
+      const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}/educators/add-course`, {
+          method: "POST",
+          body: formData, // ✅ Sending `FormData`
+          headers: {
+              Authorization: `Bearer ${localStorage.getItem("token")}`, // ✅ Include token if required
+          },
+      });
+
+      const data = await response.json(); // ✅ Parse response JSON
+
+      if (!response.ok) {
+          throw new Error(data.message || "Failed to create course");
+      }
+
+      console.log("✅ Course Created:", data);
+      alert("Course added successfully!");
+
+      // ✅ Reset Form Fields After Successful Submission
+      setCourseTitle("");
+      setCoursePrice(0);
+      setDiscount(0);
+      setImage(null);
+      setPreviewImage(null);
+      setChapters([]);
+      if (quillRef.current) quillRef.current.root.innerHTML = ""; // ✅ Clear Quill editor
+
+  } catch (error) {
+      console.error("❌ Error adding course:", error);
+      alert(`Error: ${error.message}`);
+  }
+};
+
+  return (
+    <div className='h-screen overflow-scroll flex flex-col items-start justify-between md:p-8 md:pb-0 p-4 pt-8 pb-0'>
+      <form onSubmit={handleSubmit} className='flex flex-col gap-4 max-w-md w-full text-gray-500'>
+      <div className='flex flex-col gap-1'>
+          <p>Course Title</p>
+          <input 
+          type="text" 
+          value={courseTitle} 
+          onChange={(e) => setCourseTitle(e.target.value)} 
+          className='outline-none md:py-2.5 py-2 px-3 rounded border border-gray-500'  
+          required 
+          />
+        </div>
+
+        <div className='flex flex-col gap-1'>
+          <p>Course Description</p>
+          <div ref={editorRef}></div>
+        </div>
+
+        <div className='flex items-center justify-between flex-wrap'>
             <div className='flex flex-col gap-1'>
               <p>Course Price</p>
-              <input  onChange={e => setCoursePrice(e.target.value)} 
-                value={coursePrice} 
-                type="number" 
-                placeholder='0' 
-                className='outline-none md:py-2.5 py-2 w-28 px-3 rounded border border-gray-500' 
-                required 
+              <input type="number" 
+                  value={coursePrice} 
+                  onChange={(e) => setCoursePrice(Number(e.target.value))} 
+                  className='outline-none md:py-2.5 py-2 w-28 px-3 rounded border border-gray-500'  
+                  min={0} 
+                  placeholder='0' 
+                  required 
               />
             </div>
-
-            <div className='flex md:flex-row flex-col items-center gap-3'>
-              <p>Course Thumbnail</p>
-              <label htmlFor='thumbnailImage' className='flex items-center gap-3'>
-                <img 
-                  src={assets.file_upload_icon} 
-                  alt="" 
-                  className='p-3 bg-blue-500 rounded' 
-                />
-                <input 
-                  type="file" 
-                  id='thumbnailImage' 
-                  onChange={e => setImage(e.target.files[0])} 
-                  accept="image/*" 
-                  hidden 
-                />
-                <img 
-                  className='max-h-10' 
-                  src={image ? URL.createObjectURL(image) : ''} 
-                  alt="" 
-                />
-              </label>
-            </div>
-            </div>
-
-            <div className='flex flex-col gap-1'>
-              <p>Discount %</p>
-              <input onChange={e => setDiscount(e.target.value)} 
-                value={discount} 
-                type="number" 
-                placeholder='0' 
-                min={0} 
-                className='outline-none md:py-2.5 py-2 w-28 px-3 rounded border border-gray-500' 
-                required 
+            
+          <div className='flex md:flex-row flex-col items-center gap-3'>
+            <p>Course Thumbnail</p>
+            <label htmlFor="thumbnailImage" className='flex items-center gap-3'>
+              <img 
+              src={assets.file_upload_icon}
+              alt="Upload"
+              className='p-3 bg-blue-500 rounded' 
               />
-            </div>
+              <input 
+               type="file" 
+               id="thumbnailImage" 
+               onChange={(e) => setImage(e.target.files[0])} 
+               accept="image/*" 
+               hidden 
+               />
+              {previewImage && <img className="max-h-10" src={previewImage} alt="Preview" />}
+            </label>
+          </div>
+        </div>
 
-            {/* Adding Chapters & Lectures */}
-            <div>
+          <div className='flex flex-col gap-1'>
+            <p>Discount %</p>
+            <input 
+              type="number" 
+              value={discount} 
+              onChange={(e) => setDiscount(Number(e.target.value))} 
+              className="outline-none md:py-2.5 py-2 w-28 px-3 rounded border border-gray-500" 
+              min={0} 
+              required 
+             />
+          </div>
+
+ {/* Adding Chapters & Lectures */}
+ <div>
               {chapters.map((chapter, chapterIndex) => (
                 <div key={chapterIndex} className="bg-white border rounded-lg mb-4">
                   <div className="flex justify-between items-center p-4 border-b">
