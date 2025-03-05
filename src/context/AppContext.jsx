@@ -80,10 +80,12 @@ export const AppContextProvider = (props) => {
 
     // Function to calculate number of lectures in a course
     const calculateNoOfLectures = (course) => {
+        if (!course || !Array.isArray(course.courseContent)) return 0; // ✅ Prevents `.reduce()` error
+      
         return course.courseContent.reduce((acc, chapter) => {
-            return acc + (Array.isArray(chapter.chapterContent) ? chapter.chapterContent.length : 0);
+          return acc + (Array.isArray(chapter.chapterContent) ? chapter.chapterContent.length : 0);
         }, 0);
-    };
+      };
 
     ///////////////////////////// ENROLLED COURSES /////////////////////////////
     const [enrolledCourses, setEnrolledCourses] = useState([]);

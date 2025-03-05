@@ -33,7 +33,7 @@ const Auth = () => {
         localStorage.setItem("userData", data.data.user);
          
          if (data.data.user.role === "student"){
-          navigate('/my-enrollments')
+          navigate('/course-list')
          }
          if (data.data.user.role === "educator"){
           navigate('/educator')

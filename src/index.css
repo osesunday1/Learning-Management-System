@@ -5,11 +5,11 @@
 @theme {
   --font-primary: "Poppins", "serif";
   --color-mint-500: oklch(0.72 0.11 178);
-  --color-primary: #04413a;
-  --color-primary-100: #04413a;
+  --color-primary:#f80766;
+  --color-primary-100:#ff6da2;
   --color-secondary:#04413a;
-  --color-secondary-100:#1c222b;
-  --color-secondary-200:#082925;
+  --color-secondary-100:#006d2c;
+  --color-tertiary:#1c222b;
   
 }
 

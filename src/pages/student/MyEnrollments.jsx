@@ -13,7 +13,9 @@ const MyEnrollments = () => {
     // ✅ Check if `userData` exists before making API call
     const { data: fetchedProgress } = useFetch(userData ? `${apiUrl}/students/course-progress/${userData._id}` : null);
     
+  
 
+    
     const handleViewCourse = useCallback((courseId) => {
         navigate(`/player/${courseId}`);
     }, [navigate]);
@@ -26,6 +28,9 @@ const MyEnrollments = () => {
     if (!enrolledCourses.length && !studentProgress.length) {
         return <p className="mt-5 text-gray-500">Loading your enrolled courses...</p>;
     }
+
+
+    
 
     return (
         <>

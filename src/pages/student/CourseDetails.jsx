@@ -11,14 +11,33 @@ import YouTube from 'react-youtube';
 
 const CourseDetails = () => {
     const { id } = useParams();
-
+    
     const [courseData, setCourseData] = useState(null);
     const [openSection, setOpenSection] = useState({});
-    const [isAlreadyEnrolled, setisAlreadyEnrolled] = useState(false);
+    const [isAlreadyEnrolled, setIsAlreadyEnrolled] = useState(false);
     const [playerData, setPlayerData] = useState();
 
+    
 
-    const { allCourses, calculateRating, calculateNoOfLectures, calculateCourseDuration, calculateChapterTime, currency } = useContext(AppContext);
+    const { allCourses, userData, calculateRating, calculateNoOfLectures, calculateCourseDuration, calculateChapterTime, currency } = useContext(AppContext);
+
+
+    useEffect(() => {
+      if (!allCourses.length || !userData?._id) return;
+
+      const findCourse = allCourses.find(course => course._id === id);
+      if (!findCourse) {
+          console.error("Course not found:", id);
+          return;
+      }setCourseData(findCourse);
+
+      // ✅ Check if student is already enrolled
+      const enrolled = findCourse.enrolledStudents.includes(userData._id);
+      setIsAlreadyEnrolled(enrolled);
+
+  }, [allCourses, id, userData]);
+
+
 
     const fetchCourseData = async () => {
       const findCourse = allCourses.find(course => course._id === id);
@@ -77,7 +96,7 @@ const CourseDetails = () => {
                     <h2 className='text-xl font-semibold'>Course Structure</h2>
                     
                     <div className='pt-5'>
-                      {courseData.courseContent.map((chapter, index) => (
+                      {courseData?.courseContent?.length > 0 ? (courseData.courseContent.map((chapter, index) => (
                         <div key={index} className='border border-gray-300 bg-white mb-2 rounded'>
                           <div className='flex items-center justify-between px-4 py-3 cursor-pointer select-none' onClick={()=> toggleSection(index)}>
                             <div className='flex items-center gap-2'>
@@ -116,7 +135,9 @@ const CourseDetails = () => {
                           </div>
 
                         </div>
-                      ))}
+                      ))) : (
+                        <p>No chapters available</p> // ✅ Prevents `.map()` error
+                      )}
                     </div>
                 </div>
 
@@ -175,7 +196,7 @@ const CourseDetails = () => {
                 </div>
               </div>
 
-              <button className='md:mt-6 mt-4 w-full py-3 rounded bg-blue-600 text-white font-medium'>{isAlreadyEnrolled ? 'Already Enrolled' : 'Enroll Now'}</button>
+              <button className={`md:mt-6 mt-4 w-full py-3 rounded ${isAlreadyEnrolled ? "bg-primary" : "bg-secondary"} text-white font-medium`}>{isAlreadyEnrolled ? 'Already Enrolled' : 'Enroll Now'}</button>
 
               <div className='pt-6'>
                 <p className='md:text-xl text-lg font-medium text-gray-800'>What's in the course?</p>
