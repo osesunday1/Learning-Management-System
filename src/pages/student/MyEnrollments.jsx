@@ -78,7 +78,7 @@ const MyEnrollments = () => {
 
                                         <td className="px-4 py-3 max-sm:text-right">
                                             <button
-                                                className="px-3 sm:px-5 py-1.5 sm:py-2 max-sm:text-xs text-white bg-secondary"
+                                                className="px-3 sm:px-5 py-1.5 sm:py-2 max-sm:text-xs text-white bg-secondary hover:bg-secondary-100 cursor-pointer"
                                                 onClick={() => handleViewCourse(course._id)}
                                             >
                                                 View Course

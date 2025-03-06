@@ -6,6 +6,8 @@ import humanizeDuration from "humanize-duration";
 import YouTube from "react-youtube";
 import Footer from "../../components/student/Footer";
 import Rating from "../../components/student/Rating";
+import useFetch from "../../components/customHooks/useFetch";
+
 
 const Player = () => {
 
@@ -14,8 +16,11 @@ const Player = () => {
   const [courseData, setCourseData]= useState(null);
   const [openSection, setOpenSection] = useState({});
   const [playerData, setPlayerData] = useState(null);
-  
 
+  const apiUrl = import.meta.env.VITE_BACKEND_URL;
+  const { data } = useFetch(`${apiUrl}/courses/${courseId}`); // Fetch all courses
+  console.log(data)
+/** 
   const getCourseData = () => {
     enrolledCourses.map((course) => {
       if (course._id === courseId) {
@@ -23,10 +28,13 @@ const Player = () => {
       }
     });
   };
-  
+  */
+
   useEffect(() => {
-    getCourseData();
-  }, [enrolledCourses]);
+    if (data) { // ✅ Only update when data is available
+      setCourseData(data);
+    }
+  }, [data]); 
 
   const toggleSection = (index) => {
     setOpenSection((prev) => ({
@@ -34,6 +42,8 @@ const Player = () => {
       [index]: !prev[index],
     }));
   };
+
+  console.log(courseData)
 
   return (
     <>
@@ -102,7 +112,7 @@ const Player = () => {
 />
                   <div className='flex justify-between items-center mt-1'>
                     <p>{playerData.chapter}.{playerData.lecture} {playerData.lectureTitle}</p>
-                    <button className='text-blue-600'>
+                    <button className='text-blue-600 cursor-pointer'>
                       {false ? 'Completed' : 'Mark Complete'}
                     </button>
                   </div>

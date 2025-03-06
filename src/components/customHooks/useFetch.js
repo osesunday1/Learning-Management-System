@@ -8,7 +8,7 @@ import { toast } from 'react-toastify';
 
 
 const useFetch = (url, trigger = null) => {
-  const [data, setData] = useState([]);
+  const [data, setData] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
