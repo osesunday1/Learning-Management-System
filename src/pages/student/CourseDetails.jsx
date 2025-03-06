@@ -196,7 +196,7 @@ const CourseDetails = () => {
                 </div>
               </div>
 
-              <button className={`md:mt-6 mt-4 w-full py-3 rounded ${isAlreadyEnrolled ? "bg-primary" : "bg-secondary"} text-white font-medium`}>{isAlreadyEnrolled ? 'Already Enrolled' : 'Enroll Now'}</button>
+              <button className={`md:mt-6 mt-4 w-full py-3 rounded cursor-pointer ${isAlreadyEnrolled ? "bg-primary" : "bg-secondary"} ${isAlreadyEnrolled ? "hover:bg-primary-100" : "hover:bg-secondary-100"} text-white font-medium cursorpointer`}>{isAlreadyEnrolled ? 'Proceed' : 'Enroll Now'}</button>
 
               <div className='pt-6'>
                 <p className='md:text-xl text-lg font-medium text-gray-800'>What's in the course?</p>

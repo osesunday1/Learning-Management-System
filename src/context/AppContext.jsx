@@ -23,9 +23,9 @@ export const AppContextProvider = (props) => {
                 headers: { Authorization: `Bearer ${token}` },
             });
 
-            const data = await response.json();
-            if (data && data.success !== false) {
-                setUserData(data.user);
+            const result = await response.json();
+            if (result && result.data) {
+                setUserData(result.data); // ✅ Correctly updates state
             }
         } catch (error) {
             console.error("Error fetching user data:", error);
@@ -33,8 +33,9 @@ export const AppContextProvider = (props) => {
     };
 
     useEffect(() => {
-        fetchUserData();
+        fetchUserData(); // ✅ Calls async function properly
     }, []);
+
 
     // Logout
     const logoutHandler = () => {

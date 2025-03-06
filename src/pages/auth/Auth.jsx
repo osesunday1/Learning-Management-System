@@ -89,9 +89,9 @@ const signupHandler = async () => {
 
   return (
     <Container>
-      <MainBox className="bg-primary-100">
+      <MainBox className="bg-secondary">
 
-        <SUpForm className="bg-primary-100">
+        <SUpForm className="bg-secondary">
           <Label onClick={loginSwitch} $isLogin={isLogin}>Sign Up</Label>
           <Input type="text" placeholder="Full Name" required onChange={(e) => setName(e.target.value)} />
             <Input type="email" placeholder="Email" required onChange={(e) => setEmail(e.target.value)} />
@@ -101,10 +101,10 @@ const signupHandler = async () => {
         </SUpForm>
 
         <LForm $isLogin={isLogin}>
-        <Label2 onClick={loginSwitch} $isLogin={isLogin} className="text-primary-100">Login</Label2>
+        <Label2 onClick={loginSwitch} $isLogin={isLogin} className="text-secondary">Login</Label2>
             <Input type="email" placeholder="Email" required  onChange={(e) => setEmail(e.target.value)}/>
             <Input type="password" placeholder="Password" required onChange={(e) => setPassword(e.target.value)}/>
-            <Button2 className="bg-primary-100 hover:border-primary-100" onClick={loginHandler}>Login</Button2>
+            <Button2 className="bg-secondary hover:border-secondary" onClick={loginHandler}>Login</Button2>
         </LForm>
 
       </MainBox>
