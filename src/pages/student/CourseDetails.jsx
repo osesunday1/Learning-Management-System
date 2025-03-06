@@ -6,6 +6,8 @@ import Loading from '../../components/student/Loading';
 import humanizeDuration from "humanize-duration";
 import Footer from '../../components/student/Footer';
 import YouTube from 'react-youtube';
+import usePost from '../../components/customHooks/usePost';
+import { toast } from "react-toastify";
 
 
 
@@ -16,11 +18,12 @@ const CourseDetails = () => {
     const [openSection, setOpenSection] = useState({});
     const [isAlreadyEnrolled, setIsAlreadyEnrolled] = useState(false);
     const [playerData, setPlayerData] = useState();
+    const [isEnrolling, setIsEnrolling] = useState(false); // Loading state
 
     
 
     const { allCourses, userData, calculateRating, calculateNoOfLectures, calculateCourseDuration, calculateChapterTime, currency, navigate } = useContext(AppContext);
-
+    const apiUrl = import.meta.env.VITE_BACKEND_URL;
 
     useEffect(() => {
       if (!allCourses.length || !userData?._id) return;
@@ -55,9 +58,28 @@ const CourseDetails = () => {
       }));
     };
 
-      const handleViewCourse = useCallback((courseId) => {
-            navigate(`/player/${courseId}`);
-        }, [navigate]);
+  const { postData, loading } = usePost(`${apiUrl}/students/enroll`); // ✅ Initialize usePost with the enrollment API URL
+
+    const handleEnroll = async () => {
+      if (isAlreadyEnrolled) {
+        navigate(`/player/${courseData._id}`); // If already enrolled, go to player
+        return;
+      }
+    
+      await postData({
+        postData: { courseId: courseData._id }, // ✅ Pass courseId in request body
+        successMessage: "You have successfully enrolled in the course!", // ✅ Show success message
+        onSuccess: () => {
+          setIsAlreadyEnrolled(true); // ✅ Update UI state
+        },
+        onError: (errorMessage) => {
+          toast.error(errorMessage || "Enrollment failed!"); // ✅ Show error toast
+        },
+      });
+    };
+
+
+
 
     return courseData ? (
       <>
@@ -201,8 +223,13 @@ const CourseDetails = () => {
               </div>
 
               <button 
-              onClick={() => handleViewCourse(courseData._id)}
-              className={`md:mt-6 mt-4 w-full py-3 rounded cursor-pointer ${isAlreadyEnrolled ? "bg-primary" : "bg-secondary"} ${isAlreadyEnrolled ? "hover:bg-primary-100" : "hover:bg-secondary-100"} text-white font-medium `}>{isAlreadyEnrolled ? 'Proceed' : 'Enroll Now'}
+                onClick={handleEnroll}
+                disabled={loading}
+                className={`md:mt-6 mt-4 w-full py-3 rounded cursor-pointer 
+                  ${isAlreadyEnrolled ? "bg-primary" : "bg-secondary"} 
+                  ${isAlreadyEnrolled ? "hover:bg-primary-100" : "hover:bg-secondary-100"} 
+                  text-white font-medium`}>
+                {loading ? "Enrolling..." : isAlreadyEnrolled ? "Proceed" : "Enroll Now"}
               </button>
 
               <div className='pt-6'>
