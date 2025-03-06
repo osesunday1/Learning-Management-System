@@ -41,6 +41,7 @@ export const AppContextProvider = (props) => {
     const logoutHandler = () => {
         localStorage.removeItem("token");
         localStorage.removeItem("role");
+        localStorage.removeItem("userID");
         navigate("/");
     };
 

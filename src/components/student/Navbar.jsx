@@ -35,8 +35,8 @@ const Navbar = () => {
             
           </div>
               {
-                role ? (<button onClick={()=> logoutHandler()} className="bg-secondary text-white px-5 py-2 rounded-full cursor-pointer">Logout</button>) :
-                (<button onClick={()=> navigate('/auth')} className="bg-secondary text-white px-5 py-2 rounded-full cursor-pointer">Sign In</button>)
+                role ? (<button onClick={()=> logoutHandler()} className="bg-secondary text-white px-5 py-2 rounded-full cursor-pointer hover:bg-secondary-100">Logout</button>) :
+                (<button onClick={()=> navigate('/auth')} className="bg-secondary text-white px-5 py-2 rounded-full cursor-pointer hover:bg-secondary-100">Sign In</button>)
               }
               
       </div>

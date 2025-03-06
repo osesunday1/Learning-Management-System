@@ -6,13 +6,19 @@ import useFetch from "../../components/customHooks/useFetch";
 
 const MyEnrollments = () => {
     const apiUrl = import.meta.env.VITE_BACKEND_URL;
-    const { userData, enrolledCourses, calculateCourseDuration, navigate } = useContext(AppContext);
-       // ✅ Handle cases where `useFetch` is still loading
-       const [studentProgress, setStudentProgress] = useState([]);
+    const { enrolledCourses, calculateCourseDuration, navigate } = useContext(AppContext);
+    const [fetchedProgress, setFetchedProgress]= useState(null);
 
-    // ✅ Check if `userData` exists before making API call
-    const { data: fetchedProgress } = useFetch(userData ? `${apiUrl}/students/course-progress/${userData._id}` : null);
+    ///////////////////////////// USER /////////////////////////////
+    const userData = localStorage.getItem("userID");
+// ✅ Check if `userData` exists before making API call
+    const { data } = useFetch(userData ? `${apiUrl}/students/course-progress/${userData}` : null);
     
+    useEffect(() => {
+        if (data) { // ✅ Only update when data is available
+            setFetchedProgress(data);
+        }
+      }, [data]); 
   
 
     
@@ -25,7 +31,7 @@ const MyEnrollments = () => {
         return <p className="mt-5 text-gray-500">Loading user data...</p>;
     }
 
-    if (!enrolledCourses.length && !studentProgress.length) {
+    if (!enrolledCourses.length ) {
         return <p className="mt-5 text-gray-500">Loading your enrolled courses...</p>;
     }
 

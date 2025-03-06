@@ -30,7 +30,7 @@ const Auth = () => {
       if (data.token) {
         localStorage.setItem("token", data.token);
         localStorage.setItem("role", data.data.user.role);
-        localStorage.setItem("userData", data.data.user);
+        localStorage.setItem("userID", data.data.user._id);
          
          if (data.data.user.role === "student"){
           navigate('/course-list')
@@ -72,6 +72,7 @@ const signupHandler = async () => {
     if (data.token) {
       localStorage.setItem("token", data.token);
       localStorage.setItem("role", data.data.user.role); // ✅ Fixed incorrect path
+      localStorage.setItem("userID", data.data.user._id);
 
       navigate('/my-enrollments');
     } else {

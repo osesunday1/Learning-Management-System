@@ -106,7 +106,7 @@ const Player = () => {
         {/* right column */}
         <div>
         {playerData ? (
-            <div className="bg-secondary min-h-[300px] rounded-lg shadow-lg p-4">
+            <div className="bg-secondary min-h-[300px] rounded-lg shadow-lg p-2">
             {/* Video Player Container */}
             <div className="relative overflow-hidden rounded-lg aspect-video">
               <ReactPlayer
@@ -118,7 +118,7 @@ const Player = () => {
             </div>
           
             {/* Video Information Section */}
-            <div className="flex justify-between items-center mt-4 p-3 bg-white rounded-lg shadow-md">
+            <div className="flex direction-column justify-between items-center mt-4 p-3 bg-white rounded-lg shadow-md">
               <p className="text-gray-800 font-medium">
                 {playerData.chapter}.{playerData.lecture} — {playerData.lectureTitle}
               </p>
