@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useCallback, useContext, useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { AppContext } from '../../context/AppContext';
 import { assets } from '../../assets/assets';
@@ -19,7 +19,7 @@ const CourseDetails = () => {
 
     
 
-    const { allCourses, userData, calculateRating, calculateNoOfLectures, calculateCourseDuration, calculateChapterTime, currency } = useContext(AppContext);
+    const { allCourses, userData, calculateRating, calculateNoOfLectures, calculateCourseDuration, calculateChapterTime, currency, navigate } = useContext(AppContext);
 
 
     useEffect(() => {
@@ -54,6 +54,10 @@ const CourseDetails = () => {
         [index]: !prev[index],
       }));
     };
+
+      const handleViewCourse = useCallback((courseId) => {
+            navigate(`/player/${courseId}`);
+        }, [navigate]);
 
     return courseData ? (
       <>
@@ -196,7 +200,10 @@ const CourseDetails = () => {
                 </div>
               </div>
 
-              <button className={`md:mt-6 mt-4 w-full py-3 rounded cursor-pointer ${isAlreadyEnrolled ? "bg-primary" : "bg-secondary"} ${isAlreadyEnrolled ? "hover:bg-primary-100" : "hover:bg-secondary-100"} text-white font-medium `}>{isAlreadyEnrolled ? 'Proceed' : 'Enroll Now'}</button>
+              <button 
+              onClick={() => handleViewCourse(courseData._id)}
+              className={`md:mt-6 mt-4 w-full py-3 rounded cursor-pointer ${isAlreadyEnrolled ? "bg-primary" : "bg-secondary"} ${isAlreadyEnrolled ? "hover:bg-primary-100" : "hover:bg-secondary-100"} text-white font-medium `}>{isAlreadyEnrolled ? 'Proceed' : 'Enroll Now'}
+              </button>
 
               <div className='pt-6'>
                 <p className='md:text-xl text-lg font-medium text-gray-800'>What's in the course?</p>

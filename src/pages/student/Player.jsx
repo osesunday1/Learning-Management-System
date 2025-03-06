@@ -7,6 +7,8 @@ import YouTube from "react-youtube";
 import Footer from "../../components/student/Footer";
 import Rating from "../../components/student/Rating";
 import useFetch from "../../components/customHooks/useFetch";
+import ReactPlayer from "react-player";
+
 
 
 const Player = () => {
@@ -19,7 +21,7 @@ const Player = () => {
 
   const apiUrl = import.meta.env.VITE_BACKEND_URL;
   const { data } = useFetch(`${apiUrl}/courses/${courseId}`); // Fetch all courses
-  console.log(data)
+
 /** 
   const getCourseData = () => {
     enrolledCourses.map((course) => {
@@ -43,7 +45,6 @@ const Player = () => {
     }));
   };
 
-  console.log(courseData)
 
   return (
     <>
@@ -105,18 +106,29 @@ const Player = () => {
         {/* right column */}
         <div>
         {playerData ? (
-            <div>
-                <YouTube 
-  videoId={new URL(playerData.lectureUrl).searchParams.get("v")} 
-  iframeClassName='w-full aspect-video' 
-/>
-                  <div className='flex justify-between items-center mt-1'>
-                    <p>{playerData.chapter}.{playerData.lecture} {playerData.lectureTitle}</p>
-                    <button className='text-blue-600 cursor-pointer'>
-                      {false ? 'Completed' : 'Mark Complete'}
-                    </button>
-                  </div>
+            <div className="bg-secondary min-h-[300px] rounded-lg shadow-lg p-4">
+            {/* Video Player Container */}
+            <div className="relative overflow-hidden rounded-lg aspect-video">
+              <ReactPlayer
+                url={playerData.lectureUrl} // Pass the full YouTube URL
+                controls
+                width="100%"
+                height="100%"
+              />
             </div>
+          
+            {/* Video Information Section */}
+            <div className="flex justify-between items-center mt-4 p-3 bg-white rounded-lg shadow-md">
+              <p className="text-gray-800 font-medium">
+                {playerData.chapter}.{playerData.lecture} — {playerData.lectureTitle}
+              </p>
+          
+              {/* Mark Complete Button */}
+              <button className="px-4 py-2 text-sm font-semibold text-white bg-secondary rounded-md shadow-md hover:bg-secondary-100 cursor-pointer transition-all">
+                {false ? "Completed" : "Mark Complete"}
+              </button>
+            </div>
+          </div>
         ) : (<img src={courseData ? courseData.courseThumbnail : ''} alt="" />)
         }
 
