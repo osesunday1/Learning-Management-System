@@ -1,4 +1,4 @@
-import uniqid from 'uniqid';
+import { v4 as uuidv4 } from 'uuid';
 import Quill from 'quill';
 import "quill/dist/quill.snow.css";
 import { useRef } from 'react';
@@ -35,7 +35,7 @@ const AddCourse = () => {
         const title = prompt('Enter Chapter Name:');
         if (title) {
           const newChapter = {
-            chapterId: uniqid(),
+            chapterId: uuidv4(),
             chapterTitle: title,
             chapterContent: [],
             collapsed: false,
@@ -83,7 +83,7 @@ const AddCourse = () => {
                 lectureOrder: chapter.chapterContent.length > 0
                   ? chapter.chapterContent.slice(-1)[0].lectureOrder + 1
                   : 1,
-                lectureId: uniqid(),
+                lectureId: uuidv4(),
               };
       
               // ✅ Create a new array instead of mutating `chapterContent`

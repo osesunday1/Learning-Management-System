@@ -1,4 +1,4 @@
-import uniqid from "uniqid";
+import { v4 as uuidv4 } from 'uuid';
 import Quill from "quill";
 import "quill/dist/quill.snow.css";
 import { useRef, useState, useEffect } from "react";
@@ -54,7 +54,7 @@ const AddCourse = () => {
       const title = prompt("Enter Chapter Name:");
       if (title) {
         const newChapter = {
-          chapterId: uniqid(),
+          chapterId: uuidv4(),
           chapterTitle: title,
           chapterContent: [],
           collapsed: false,
@@ -97,7 +97,7 @@ const AddCourse = () => {
               ...chapter,
               chapterContent: [
                 ...chapter.chapterContent,
-                { ...lectureDetails, lectureOrder: chapter.chapterContent.length + 1, lectureId: uniqid() },
+                { ...lectureDetails, lectureOrder: chapter.chapterContent.length + 1, lectureId: uuidv4() },
               ],
             }
           : chapter
