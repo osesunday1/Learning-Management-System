@@ -75,7 +75,11 @@ const MyCourses = () => {
                   <td className="px-4 py-3">
                     ${Math.floor(course.enrolledStudents.length * course.coursePrice - course.discount * course.coursePrice / 100)}
                   </td>
-                  <td className="px-4 py-3">{course.enrolledStudents.length}</td>
+                  <td className="px-4 py-3 cursor-pointer text-blue-600 hover:underline"
+                  onClick={() => navigate(`/educator/student-enrolled/${course._id}`, { state: { courseTitle: course.courseTitle } })}
+                  >
+                    {course.enrolledStudents.length}
+                    </td>
                   <td className="px-4 py-3">
                     {new Date(course.createdAt).toLocaleDateString()}
                   </td>

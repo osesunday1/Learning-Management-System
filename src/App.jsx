@@ -53,7 +53,7 @@ export const App = () => {
             <Route index element={<Dashboard />} />
             <Route path='add-course' element={ <AddCourse/>}/>
             <Route path='my-courses' element={ <MyCourses/>}/>
-            <Route path='student-enrolled' element={ <StudentsEnrolled/>}/>
+            <Route path='student-enrolled/:courseId' element={ <StudentsEnrolled/>}/>
 
             <Route path="/educator/update-course/:courseId" element={<UpdateCourse />} />
         </Route>

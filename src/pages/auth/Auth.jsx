@@ -2,7 +2,7 @@ import React, { useContext, useState } from "react";
 import styled from "styled-components";
 import { AppContext } from "../../context/AppContext";
 import axios from "axios";
-
+import { toast } from "react-toastify";
 
 
 const Auth = () => {
@@ -11,15 +11,34 @@ const Auth = () => {
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [name, setName] = useState("");
-
+  const [loading, setLoading] = useState(false); //Prevent multiple clicks
 
   const {navigate} = useContext(AppContext)
 
   const apiUrl = import.meta.env.VITE_BACKEND_URL;
 
+  // Common validation function
+  const validateForm = () => {
+    if (!email || !password) {
+      toast.error("Email and password are required.");
+      return false;
+    }
+    if (!isLogin && (!name || password !== confirmPassword)) {
+      toast.error("Please fill all fields correctly.");
+      return false;
+    }
+    return true;
+  };
+
     //Login Handler
-    const loginHandler = async () => {
-      const apiUrl = import.meta.env.VITE_BACKEND_URL;
+  const loginHandler = async (e) => {
+      e.preventDefault();
+      if (!validateForm()) return;
+
+
+      setLoading(true);
+
+      try {
       const response = await fetch(`${apiUrl}/auth/login`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -38,19 +57,26 @@ const Auth = () => {
          if (data.data.user.role === "educator"){
           navigate('/educator')
          }
-         
-      } else {
-        alert("Invalid login credentials");
+        }else {
+          toast.error("Invalid login credentials.");
+        }
+      } catch (error) {
+        toast.error("Login failed. Please try again.");
       }
+      setLoading(false);
     };
+ 
+    
 
 
 // Signup Handler
-const signupHandler = async () => {
-  if (password !== confirmPassword) {
-    alert("Passwords do not match!");
-    return;
-  }
+const signupHandler = async (E) => {
+  e.preventDefault();
+  if (!validateForm()) return;
+
+  setLoading(true);
+
+
 
   try {
     const response = await fetch(`${apiUrl}/auth/signup`, {
@@ -59,28 +85,29 @@ const signupHandler = async () => {
       body: JSON.stringify({ name, email, password, passwordConfirm: confirmPassword }),
     });
 
-    // ✅ Check if API request was successful
+    //  Check if API request was successful
     if (!response.ok) {
       const errorData = await response.json();
       throw new Error(errorData.message || "Signup failed.");
     }
 
-    const data = await response.json(); // ✅ Correct data extraction
+    const data = await response.json(); // Correct data extraction
 
     
 
-    if (data.token) {
+    if (response.ok && data.token) {
       localStorage.setItem("token", data.token);
-      localStorage.setItem("role", data.data.user.role); // ✅ Fixed incorrect path
+      localStorage.setItem("role", data.data.user.role); 
       localStorage.setItem("userID", data.data.user._id);
 
-      navigate('/my-enrollments');
+      navigate('/course-list');
     } else {
-      alert(data.message || "Signup failed. Please try again.");
+      toast.error(data.message || "Signup failed.");
     }
   } catch (error) {
-    alert(`Error signing up. ${error.message}`);
+    toast.error("Signup failed. Please try again.");
   }
+  setLoading(false);
 };
 
 
@@ -92,19 +119,21 @@ const signupHandler = async () => {
     <Container>
       <MainBox className="bg-secondary">
 
-        <SUpForm className="bg-secondary">
+        <SUpForm className={`bg-secondary transition-all duration-500 ease-in-out transform ${
+    isLogin ? "opacity-0 scale-90 pointer-events-none" : "opacity-100 scale-100"
+  }`} onSubmit={signupHandler}>
           <Label onClick={loginSwitch} $isLogin={isLogin}>Sign Up</Label>
-          <Input type="text" placeholder="Full Name" required onChange={(e) => setName(e.target.value)} />
-            <Input type="email" placeholder="Email" required onChange={(e) => setEmail(e.target.value)} />
-            <Input type="password" placeholder="Password" required onChange={(e) => setPassword(e.target.value)} />
-            <Input type="password" placeholder="Repeat Password" required onChange={(e) => setConfirmPassword(e.target.value)} />
+          <Input type="text" placeholder="Full Name" required value={name} onChange={(e) => setName(e.target.value)} />
+            <Input type="email" placeholder="Email" required value={email} onChange={(e) => setEmail(e.target.value)} />
+            <Input type="password" placeholder="Password" required value={password} onChange={(e) => setPassword(e.target.value)} />
+            <Input type="password" placeholder="Repeat Password" required value={confirmPassword} onChange={(e) => setConfirmPassword(e.target.value)} />
             <Button onClick={signupHandler}>Sign Up</Button>
         </SUpForm>
 
         <LForm $isLogin={isLogin}>
         <Label2 onClick={loginSwitch} $isLogin={isLogin} className="text-secondary">Login</Label2>
-            <Input type="email" placeholder="Email" required  onChange={(e) => setEmail(e.target.value)}/>
-            <Input type="password" placeholder="Password" required onChange={(e) => setPassword(e.target.value)}/>
+            <Input type="email" placeholder="Email" required value={email} onChange={(e) => setEmail(e.target.value)}/>
+            <Input type="password" placeholder="Password" required value={password} onChange={(e) => setPassword(e.target.value)}/>
             <Button2 className="bg-secondary hover:border-secondary" onClick={loginHandler}>Login</Button2>
         </LForm>
 
@@ -133,12 +162,10 @@ const MainBox = styled.div`
   margin: 0 auto;
 `;
 
-const SUpForm = styled.div`
+const SUpForm = styled.form`
   position: absolute;
   width: 100%;
   height: 100%;
-  border-radius: 60% / 10%;
-  transition: 0.8s ease-in-out;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -146,11 +173,11 @@ const SUpForm = styled.div`
   padding-top: -14px;
 `;
 
-const LForm = styled.div`
-    display:flex;
-    flex-direction:column;
-    align-items: center;
-    justify-content: center;
+const LForm = styled.form`
+  display:flex;
+  flex-direction:column;
+  align-items: center;
+  justify-content: center;
 	height: 360px;
 	background: #eee;
 	border-radius: 20% / 20%;
