@@ -49,6 +49,7 @@ const StudentsEnrolled = () => { // ✅ Accept courseId as a prop
             <tr>
               <th className="px-4 py-3 font-semibold text-center hidden sm:table-cell">#</th>
               <th className="px-4 py-3 font-semibold">Student Name</th>
+              <th className="px-4 py-3 font-semibold">Student Email</th>
               <th className="px-4 py-3 font-semibold">Course Title</th>
               <th className="px-4 py-3 font-semibold hidden sm:table-cell">Date</th>
             </tr>
@@ -66,6 +67,7 @@ const StudentsEnrolled = () => { // ✅ Accept courseId as a prop
                     />
                     <span className="truncate">{item.student.name}</span>
                   </td>
+                  <td className="px-4 py-3 truncate">{item.student.email}</td>
                   <td className="px-4 py-3 truncate">{item.courseTitle}</td>
                   <td className="px-4 py-3 hidden sm:table-cell">
                     {new Date(item.purchaseDate).toLocaleDateString()}
