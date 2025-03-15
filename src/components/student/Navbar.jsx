@@ -1,18 +1,30 @@
 import { Link } from "react-router-dom";
 import { assets } from "../../assets/assets";
-import { useContext } from "react";
+import { useContext, useEffect, useState } from "react";
 import { AppContext } from "../../context/AppContext";
-
+import useFetch from "../customHooks/useFetch";
 
 const Navbar = () => {
+  const apiUrl = import.meta.env.VITE_BACKEND_URL;
 
-
-  const {navigate, isEducator, logoutHandler, userData} = useContext(AppContext)
-
-
+  const {navigate, isEducator, logoutHandler} = useContext(AppContext)
+  const [isOpen, setIsOpen] = useState(false);
+  
   const token = localStorage.getItem("token");
   const role = localStorage.getItem("role");
+  const userID = localStorage.getItem("userID");
 
+  //////==================get all userdata==========\\\\\\\\\\\\
+  // ✅ Fetch user only if userData exists
+  const { data: fetchedUser } = useFetch(userID ? `${apiUrl}/users/me` : null);
+
+  // ✅ Store user
+  const [userData, setUserData] = useState([]);
+  useEffect(() => {
+      if (fetchedUser) setUserData(fetchedUser);
+  }, [fetchedUser]);
+  // Toggle dropdown
+  const toggleDropdown = () => setIsOpen(!isOpen);
 
 
 
@@ -32,11 +44,43 @@ const Navbar = () => {
             { role === "student" && <Link to='/my-enrollments' className="mx-4"> My Enrollments </Link> }
 
             </div>
+
+            {userID && (
+    <div 
+        className="relative"
+        onMouseEnter={() => setIsOpen(true)}
+        onMouseLeave={() => setIsOpen(false)}
+    >
+        {/* User Image */}
+        <img 
+            src={userData.photo || "/default-avatar.png"} 
+            alt="User Avatar" 
+            className="w-10 h-10 rounded-full cursor-pointer border-2 border-white hover:border-gray-400"
+        />
+
+        {/* Invisible buffer to prevent flickering */}
+        <div className="absolute top-full w-full h-2"></div>
+
+        {/* Dropdown Menu */}
+        {isOpen && (
+            <div 
+                className="absolute right-0 mt-2 w-48 bg-white text-gray-900 rounded-lg shadow-lg z-50"
+            >
+                <Link to="/profile" className="block px-4 py-2 hover:bg-gray-200">Profile</Link>
+                <button 
+                    onClick={logoutHandler} 
+                    className="w-full text-left px-4 py-2 hover:bg-gray-200"
+                >
+                    Logout
+                </button>
+            </div>
+        )}
+    </div>
+)}
             
           </div>
               {
-                role ? (<button onClick={()=> logoutHandler()} className="bg-secondary text-white px-5 py-2 rounded-full cursor-pointer hover:bg-secondary-100">Logout</button>) :
-                (<button onClick={()=> navigate('/auth')} className="bg-secondary text-white px-5 py-2 rounded-full cursor-pointer hover:bg-secondary-100">Sign In</button>)
+                !userID && (<button onClick={()=> navigate('/auth')} className="bg-secondary text-white px-5 py-2 rounded-full cursor-pointer hover:bg-secondary-100">Sign In</button>)
               }
               
       </div>

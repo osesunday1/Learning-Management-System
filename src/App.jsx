@@ -18,6 +18,7 @@ import Unauthorized from './components/auth/Unauthorized'
 import ProtectedRoute from './components/auth/ProtectedRoute'
 import { ToastContainer, toast } from 'react-toastify';
 import UpdateCourse from './pages/educator/UpdateCourse'
+import UserProfile from './pages/auth/UserProfile'
 
 
 
@@ -48,6 +49,7 @@ export const App = () => {
         <Route path='/course/:id' element={ <CourseDetails />} />
         <Route path='/player/:courseId' element={ <Player />} />
         <Route path='/loading/:path' element={ <Loading />} />
+        <Route path="/profile" element={<UserProfile />} />
 
         <Route path='/educator' element={ <Educator /> }>
             <Route index element={<Dashboard />} />

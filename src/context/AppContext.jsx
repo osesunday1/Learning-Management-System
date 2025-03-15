@@ -89,19 +89,7 @@ export const AppContextProvider = (props) => {
         }, 0);
       };
 
-    ///////////////////////////// ENROLLED COURSES /////////////////////////////
-    const [enrolledCourses, setEnrolledCourses] = useState([]);
-
-    useEffect(() => {
-        if (!userData || !userData._id || allCourses.length === 0) return;
-        
-        const userEnrolledCourses = allCourses.filter(course => 
-            Array.isArray(course.enrolledStudents) && course.enrolledStudents.includes(userData._id)
-        );
-
-        setEnrolledCourses(userEnrolledCourses);
-    }, [userData, allCourses]);
-
+    
 
     ////////////////////////////////EDUCATOR CREATED COURSES\\\\\\\\\\\\\\\\\\\\\
     const [createdCourses, setCreatedCourses] = useState([]);
@@ -133,9 +121,7 @@ export const AppContextProvider = (props) => {
         calculateNoOfLectures,
         calculateCourseDuration,
         calculateChapterTime,
-        enrolledCourses,
         createdCourses,
-        setEnrolledCourses,
     };
 
     return <AppContext.Provider value={value}>{props.children}</AppContext.Provider>;

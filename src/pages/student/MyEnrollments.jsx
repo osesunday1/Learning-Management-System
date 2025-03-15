@@ -8,34 +8,55 @@ import { toast } from "react-toastify";
 
 const MyEnrollments = () => {
     const apiUrl = import.meta.env.VITE_BACKEND_URL;
-    const { enrolledCourses, setEnrolledCourses, calculateCourseDuration, navigate } = useContext(AppContext);
-    const [fetchedProgress, setFetchedProgress] = useState(null);
 
-    // ✅ Fetch progress data
+    // ✅ Get userData first
     const userData = localStorage.getItem("userID");
-    const { data } = useFetch(userData ? `${apiUrl}/students/course-progress/${userData}` : null);
 
+    // ✅ Fetch all courses only if userData exists
+    const { data: fetchedCourses } = useFetch(userData ? `${apiUrl}/courses` : null);
+
+    // ✅ Store all courses
+    const [allCourses, setAllCourses] = useState([]);
     useEffect(() => {
-        if (data) setFetchedProgress(data);
-    }, [data]);
+        if (fetchedCourses) setAllCourses(fetchedCourses);
+    }, [fetchedCourses]);
+
+    // ✅ Fetch progress data only if userData exists
+    const { data: fetchedProgress } = useFetch(userData ? `${apiUrl}/students/course-progress/${userData}` : null);
+
+    // ✅ Store enrolled courses
+    const [enrolledCourses, setEnrolledCourses] = useState([]);
+
+    // ✅ Filter enrolled courses
+    useEffect(() => {
+        if (!userData || allCourses.length === 0) return;
+        
+        const userEnrolledCourses = allCourses.filter(course =>
+            Array.isArray(course.enrolledStudents) && course.enrolledStudents.includes(userData)
+        );
+
+        setEnrolledCourses(userEnrolledCourses);
+    }, [userData, allCourses]);
 
     // ✅ Hook for making the unregister API call
     const { postData, loading } = usePost(`${apiUrl}/students/unregister`);
 
+    // ✅ Handle course view
+    const { calculateCourseDuration, navigate } = useContext(AppContext);
     const handleViewCourse = useCallback((courseId) => {
         navigate(`/player/${courseId}`);
     }, [navigate]);
 
-    // ✅ Unregister function
+    // ✅ Handle course unregistration
     const handleUnregister = async (courseId) => {
         const confirmUnregister = window.confirm("Are you sure you want to unregister from this course?");
         if (!confirmUnregister) return;
 
-        const result = await postData({
+        await postData({
             postData: { courseId },
             successMessage: "You have successfully unregistered from the course!",
             onSuccess: () => {
-                setEnrolledCourses(prevCourses => prevCourses.filter(course => course._id !== courseId)); // ✅ Remove from UI
+                setEnrolledCourses(prevCourses => prevCourses.filter(course => course._id !== courseId));
             },
             onError: (errorMessage) => {
                 toast.error(errorMessage || "Unregistration failed!");
@@ -43,9 +64,10 @@ const MyEnrollments = () => {
         });
     };
 
+    // ✅ Show proper loading states
     if (!userData) return <p className="mt-5 text-gray-500">Loading user data...</p>;
-
-    if (!enrolledCourses.length) return <p className="mt-5 text-gray-500">Loading your enrolled courses...</p>;
+    if (allCourses.length === 0) return <p className="mt-5 text-gray-500">Loading courses...</p>;
+    if (enrolledCourses.length === 0) return <p className="mt-5 text-gray-500">You have not enrolled in any courses yet.</p>;
 
     return (
         <>
@@ -59,7 +81,7 @@ const MyEnrollments = () => {
                                 <th className="px-4 py-3 font-semibold truncate">Course</th>
                                 <th className="px-4 py-3 font-semibold truncate">Duration</th>
                                 <th className="px-4 py-3 font-semibold truncate">Progress</th>
-                                <th className="px-4 py-3 font-semibold truncate">Actions</th> {/* ✅ Updated column */}
+                                <th className="px-4 py-3 font-semibold truncate">Actions</th>
                             </tr>
                         </thead>
                         <tbody className="text-gray-700">
@@ -91,7 +113,7 @@ const MyEnrollments = () => {
                                             <p className="text-xs mt-1">{progress.progressPercentage.toFixed(0)}% Completed</p>
                                         </td>
 
-                                        {/* ✅ Action Buttons (View Course & Unregister) */}
+                                        {/* ✅ Action Buttons */}
                                         <td className="px-4 py-3 max-sm:text-right flex gap-3">
                                             <button
                                                 className="px-3 sm:px-5 py-1.5 sm:py-2 text-white bg-secondary hover:bg-secondary-100 cursor-pointer"

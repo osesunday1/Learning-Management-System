@@ -10,7 +10,9 @@ const Auth = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
-  const [name, setName] = useState("");
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
+  const [profileImage, setProfileImage] = useState(null);
   const [loading, setLoading] = useState(false); //Prevent multiple clicks
 
   const {navigate} = useContext(AppContext)
@@ -23,7 +25,7 @@ const Auth = () => {
       toast.error("Email and password are required.");
       return false;
     }
-    if (!isLogin && (!name || password !== confirmPassword)) {
+    if (!isLogin && (!firstName || !lastName || password !== confirmPassword)) {
       toast.error("Please fill all fields correctly.");
       return false;
     }
@@ -66,49 +68,60 @@ const Auth = () => {
       setLoading(false);
     };
  
-    
+
+// Function to handle file selection
+const handleImageChange = (e) => {
+  setProfileImage(e.target.files[0]);
+};
+
 
 
 // Signup Handler
-const signupHandler = async (E) => {
-  e.preventDefault();
-  if (!validateForm()) return;
 
-  setLoading(true);
+  // 🔹 Signup Handler
+  const signupHandler = async (e) => {
+    e.preventDefault();
+    if (!validateForm()) return;
+
+    setLoading(true);
 
 
+    try {
+      const formData = new FormData();
+      formData.append("firstName", firstName);
+      formData.append("lastName", lastName);
+      formData.append("email", email);
+      formData.append("password", password);
+      formData.append("passwordConfirm", confirmPassword);
+      if (profileImage) {
+        formData.append("photo", profileImage);
+      }
 
-  try {
-    const response = await fetch(`${apiUrl}/auth/signup`, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ name, email, password, passwordConfirm: confirmPassword }),
-    });
+      const response = await fetch(`${apiUrl}/auth/signup`, {
+        method: "POST",
+        body: formData,
+      });
 
-    //  Check if API request was successful
-    if (!response.ok) {
-      const errorData = await response.json();
-      throw new Error(errorData.message || "Signup failed.");
+      const data = await response.json();
+
+      if (response.ok && data.token) {
+        localStorage.setItem("token", data.token);
+        localStorage.setItem("role", data.data.user.role);
+        localStorage.setItem("userID", data.data.user._id);
+
+        navigate("/course-list");
+      } else {
+        toast.error(data.message || "Signup failed.");
+      }
+    } catch (error) {
+      toast.error(error || "Signup failed. Please try again.");;
     }
 
-    const data = await response.json(); // Correct data extraction
+    setLoading(false);
+  };
 
-    
 
-    if (response.ok && data.token) {
-      localStorage.setItem("token", data.token);
-      localStorage.setItem("role", data.data.user.role); 
-      localStorage.setItem("userID", data.data.user._id);
 
-      navigate('/course-list');
-    } else {
-      toast.error(data.message || "Signup failed.");
-    }
-  } catch (error) {
-    toast.error("Signup failed. Please try again.");
-  }
-  setLoading(false);
-};
 
 
   function loginSwitch(){
@@ -122,12 +135,14 @@ const signupHandler = async (E) => {
         <SUpForm className={`bg-secondary transition-all duration-500 ease-in-out transform ${
     isLogin ? "opacity-0 scale-90 pointer-events-none" : "opacity-100 scale-100"
   }`} onSubmit={signupHandler}>
-          <Label onClick={loginSwitch} $isLogin={isLogin}>Sign Up</Label>
-          <Input type="text" placeholder="Full Name" required value={name} onChange={(e) => setName(e.target.value)} />
+            <Label onClick={loginSwitch} $isLogin={isLogin}>Sign Up</Label>
+            <Input type="text" placeholder="First Name" required value={firstName} onChange={(e) => setFirstName(e.target.value)} />
+            <Input type="text" placeholder="Last Name" required value={lastName} onChange={(e) => setLastName(e.target.value)} />
             <Input type="email" placeholder="Email" required value={email} onChange={(e) => setEmail(e.target.value)} />
             <Input type="password" placeholder="Password" required value={password} onChange={(e) => setPassword(e.target.value)} />
             <Input type="password" placeholder="Repeat Password" required value={confirmPassword} onChange={(e) => setConfirmPassword(e.target.value)} />
-            <Button onClick={signupHandler}>Sign Up</Button>
+            <Input type="file" accept="image/*" onChange={handleImageChange} />
+            <Button type="submit" disabled={loading} >{loading ? "Signing Up..." : "Sign Up"}</Button>
         </SUpForm>
 
         <LForm $isLogin={isLogin}>
@@ -155,7 +170,7 @@ const Container = styled.div`
 const MainBox = styled.div`
   position: relative;
   width: 350px;
-  height: 500px;
+  height: 600px;
   border-radius: 10px;
   box-shadow: 5px 20px 50px #000;
   overflow: hidden;
@@ -169,8 +184,7 @@ const SUpForm = styled.form`
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
-  padding-top: -14px;
+  margin-top: 8%;
 `;
 
 const LForm = styled.form`
@@ -181,7 +195,7 @@ const LForm = styled.form`
 	height: 360px;
 	background: #eee;
 	border-radius: 20% / 20%;
-	transform: ${(props) => (props.$isLogin ? 'translateY(130px)' : 'translateY(430px)')};
+	transform: ${(props) => (props.$isLogin ? 'translateY(130px)' : 'translateY(520px)')};
 	transition: .8s ease-in-out;
 `;
 
