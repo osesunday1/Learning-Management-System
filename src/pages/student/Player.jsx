@@ -20,7 +20,7 @@ const Player = () => {
   const [playerData, setPlayerData] = useState(null);
 
   const apiUrl = import.meta.env.VITE_BACKEND_URL;
-  const { data } = useFetch(`${apiUrl}/courses/${courseId}`); // Fetch all courses
+  const { data } = useFetch(`${apiUrl}/courses/${courseId}`); // Fetch course
 
 /** 
   const getCourseData = () => {
@@ -71,21 +71,38 @@ const Player = () => {
                 </div>
 
                 <div className= {`overflow-hidden transition-all duration-300 ${openSection[index] ? 'max-h-96' : 'max-h-0'}`}>
-                  <ul className='list-disc md:pl-10 pl-4 pr-4 py-2 text-gray-600 border-t border-gray-300'>
+                <ul className='list-disc md:pl-10 pl-4 pr-4 py-2 text-gray-600 border-t border-gray-300'>
                     {chapter.chapterContent.map((lecture, i) => (
                       <li key={i} className='flex items-start gap-2 py-1'>
                         <img src={false ? assets.blue_tick_icon : assets.play_icon} alt="play icon" className="w-4 h-4 mt-1" />
                         <div className='flex items-center justify-between w-full text-gray-800 text-xs md:text-default'>
                           <p>{lecture.lectureTitle}</p>
                           <div className='flex gap-2'>
-                            {lecture.lectureUrl && <p onClick={()=> setPlayerData({
-                              ...lecture, chapter: index + 1, lecture: i + 1
-                            })} className='text-blue-500 cursor-pointer'>Watch</p>}
-                            <p>
-                              {humanizeDuration(lecture.lectureDuration * 60 * 1000, {
-                                units: ["h", "m"],
-                              })}
-                            </p>
+
+                            {/* ✅ Show "Watch" button if it's a video */}
+                            {lecture.lectureUrl && (
+                              <p onClick={() => setPlayerData({
+                                ...lecture, chapter: index + 1, lecture: i + 1
+                              })} className='text-blue-500 cursor-pointer'>Watch</p>
+                            )}
+
+                            {/* ✅ Show "Download" button if it's a document */}
+                            {lecture.lectureFile && lecture.lectureFile.url && (
+                              <a 
+                              href={`${lecture.lectureFile.url}?fl_attachment=true`} 
+                              download={lecture.lectureFile.filename} 
+                              target="_blank" 
+                              rel="noopener noreferrer" 
+                              className='text-green-500 cursor-pointer'>
+                              Download PDF
+                            </a>
+                            )}
+
+                            {/* Show lecture duration */}
+                            <p>{humanizeDuration(lecture.lectureDuration * 60 * 1000, {
+                              units: ["h", "m"],
+                            })}</p>
+
                           </div>
                         </div>
                       </li>
@@ -107,30 +124,37 @@ const Player = () => {
         <div>
         {playerData ? (
             <div className="bg-secondary min-h-[300px] rounded-lg shadow-lg p-2">
-            {/* Video Player Container */}
-            <div className="relative overflow-hidden rounded-lg aspect-video">
-              <ReactPlayer
-                url={playerData.lectureUrl} // Pass the full YouTube URL
-                controls
-                width="100%"
-                height="100%"
-              />
+              {playerData.lectureUrl ? (
+                // ✅ Video Player
+                <div className="relative overflow-hidden rounded-lg aspect-video">
+                  <ReactPlayer url={playerData.lectureUrl} controls width="100%" height="100%" />
+                </div>
+              ) : (
+                // ✅ Show Document
+                <div className="p-4 bg-white rounded-lg shadow-md text-center">
+                  <p className="text-gray-800 font-medium">
+                    {playerData.chapter}.{playerData.lecture} — {playerData.lectureTitle}
+                  </p>
+                  <a href={playerData.lectureFile.url} target="_blank" rel="noopener noreferrer"
+                    className="text-blue-500 cursor-pointer text-lg font-semibold">
+                    Open Document
+                  </a>
+                </div>
+              )}
+
+              {/* Video / Document Info Section */}
+              <div className="flex direction-column justify-between items-center mt-4 p-3 bg-white rounded-lg shadow-md">
+                <p className="text-gray-800 font-medium">
+                  {playerData.chapter}.{playerData.lecture} — {playerData.lectureTitle}
+                </p>
+                <button className="px-4 py-2 text-sm font-semibold text-white bg-secondary rounded-md shadow-md hover:bg-secondary-100 cursor-pointer transition-all">
+                  {false ? "Completed" : "Mark Complete"}
+                </button>
+              </div>
             </div>
-          
-            {/* Video Information Section */}
-            <div className="flex direction-column justify-between items-center mt-4 p-3 bg-white rounded-lg shadow-md">
-              <p className="text-gray-800 font-medium">
-                {playerData.chapter}.{playerData.lecture} — {playerData.lectureTitle}
-              </p>
-          
-              {/* Mark Complete Button */}
-              <button className="px-4 py-2 text-sm font-semibold text-white bg-secondary rounded-md shadow-md hover:bg-secondary-100 cursor-pointer transition-all">
-                {false ? "Completed" : "Mark Complete"}
-              </button>
-            </div>
-          </div>
-        ) : (<img src={courseData ? courseData.courseThumbnail : ''} alt="" />)
-        }
+          ) : (
+            <img src={courseData ? courseData.courseThumbnail : ''} alt="" />
+          )}
 
         </div>
 

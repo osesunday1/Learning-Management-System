@@ -37,13 +37,7 @@ export const AppContextProvider = (props) => {
     }, []);
 
 
-    // Logout
-    const logoutHandler = () => {
-        localStorage.removeItem("token");
-        localStorage.removeItem("role");
-        localStorage.removeItem("userID");
-        navigate("/");
-    };
+
 
     ///////////////////////////// COURSES /////////////////////////////
     const [allCourses, setAllCourses] = useState([]);
@@ -111,7 +105,6 @@ export const AppContextProvider = (props) => {
 
     const value = {
         userData,
-        logoutHandler,
         currency,
         allCourses,
         navigate,

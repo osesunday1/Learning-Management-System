@@ -39,11 +39,9 @@ const UpdateCourse = () => {
         headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
       });
   
-      console.log("✅ Response:", response.data);
       alert("Course updated successfully!");
       navigate("/educator/my-courses");
     } catch (error) {
-      console.error("❌ Error updating course:", error.response?.data || error);
       alert(`Failed to update course: ${error.response?.data?.message || "Server error"}`);
     }
   };

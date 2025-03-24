@@ -3,11 +3,11 @@ import Quill from "quill";
 import "quill/dist/quill.snow.css";
 import { useRef, useState, useEffect } from "react";
 import { assets } from "../../assets/assets";
-
+import { toast } from "react-toastify";
 
 const AddCourse = () => {
   const apiUrl = import.meta.env.VITE_BACKEND_URL;
-
+  const [courseDocuments, setCourseDocuments] = useState([]); // ✅ Store uploaded course documents
 
   const quillRef = useRef(null);
   const editorRef = useRef(null);
@@ -24,6 +24,7 @@ const AddCourse = () => {
     lectureTitle: "",
     lectureDuration: "",
     lectureUrl: "",
+    lectureFile: null, //Stores the uploaded document
     isPreviewFree: false,
   });
 
@@ -90,106 +91,139 @@ const AddCourse = () => {
 
   // ✅ Add Lecture to Chapter
   const addLecture = () => {
-    setChapters(
-      chapters.map((chapter) =>
-        chapter.chapterId === currentChapterId
-          ? {
-              ...chapter,
-              chapterContent: [
-                ...chapter.chapterContent,
-                { ...lectureDetails, lectureOrder: chapter.chapterContent.length + 1, lectureId: uuidv4() },
-              ],
-            }
-          : chapter
-      )
-    );
+    if (!lectureDetails.lectureTitle.trim()) {
+      alert("Lecture title is required.");
+      return;
+    }
+
+    if (lectureDetails.lectureType === "video" && !lectureDetails.lectureUrl.trim()) {
+      alert("Lecture URL is required for videos.");
+      return;
+    }
+  
+    if (lectureDetails.lectureType === "document" && !lectureDetails.lectureFile) {
+      alert("Please upload a document.");
+      return;
+    }
+
+
+      setChapters((prevChapters) =>
+    prevChapters.map((chapter) =>
+      chapter.chapterId === currentChapterId
+        ? {
+            ...chapter,
+            chapterContent: [
+              ...chapter.chapterContent,
+              {
+                ...lectureDetails,
+                lectureOrder: chapter.chapterContent.length + 1,
+                lectureId: uuidv4(),
+              },
+            ],
+          }
+        : chapter
+    )
+  );
 
     setShowPopup(false);
-    setLectureDetails({ lectureTitle: "", lectureDuration: "", lectureUrl: "", isPreviewFree: false });
+    setLectureDetails({ lectureTitle: "", lectureDuration: "", lectureUrl: "", lectureFile: null, isPreviewFree: false });
   };
 
   //================================ ✅ Submit Course Data
-const handleSubmit = async (e) => {
-  e.preventDefault();
-
-  // ✅ Validate Required Fields
-  if (!courseTitle.trim()) {
-      alert("Course title is required.");
-      return;
-  }
-
-  if (!quillRef.current || !quillRef.current.root.innerHTML.trim()) {
-      alert("Course description is required.");
-      return;
-  }
-
-  if (!coursePrice || coursePrice < 0) {
-      alert("Course price must be a positive number.");
-      return;
-  }
-
-  if (discount < 0 || discount > coursePrice) {
-      alert("Discount must be between 0 and the course price.");
-      return;
-  }
-
-  if (!image) {
-      alert("Please upload a course thumbnail.");
-      return;
-  }
-
-  if (chapters.length === 0) {
-      alert("Please add at least one chapter.");
-      return;
-  }
-
-  // ✅ Prepare Course Data
-  const courseData = {
-      courseTitle,
-      courseDescription: quillRef.current.root.innerHTML, // ✅ Extracts Quill content
-      coursePrice,
-      discount,
-      courseContent: chapters,
-  };
-
-  // ✅ Create FormData for Backend Submission
-  const formData = new FormData();
-  formData.append("courseData", JSON.stringify(courseData)); // ✅ Convert object to JSON string
-  formData.append("image", image); // ✅ Append image file
-
-  try {
-      // ✅ Submit Course Data Using `fetch`
-      const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}/educators/add-course`, {
-          method: "POST",
-          body: formData, // ✅ Sending `FormData`
-          headers: {
-              Authorization: `Bearer ${localStorage.getItem("token")}`, // ✅ Include token if required
-          },
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+  
+    // ✅ Validate Required Fields
+    if (!courseTitle.trim()) {
+        alert("Course title is required.");
+        return;
+    }
+  
+    if (!quillRef.current || !quillRef.current.root.innerHTML.trim()) {
+        alert("Course description is required.");
+        return;
+    }
+  
+    if (!coursePrice || coursePrice < 0) {
+        alert("Course price must be a positive number.");
+        return;
+    }
+  
+    if (discount < 0 || discount > coursePrice) {
+        alert("Discount must be between 0 and the course price.");
+        return;
+    }
+  
+    if (!image) {
+        alert("Please upload a course thumbnail.");
+        return;
+    }
+  
+    if (chapters.length === 0) {
+        alert("Please add at least one chapter.");
+        return;
+    }
+  
+    // ✅ Prepare Course Data
+    const courseData = {
+        courseTitle,
+        courseDescription: quillRef.current.root.innerHTML, // ✅ Extracts Quill content
+        coursePrice,
+        discount,
+        courseContent: chapters,
+    };
+  
+    // ✅ Create FormData for Backend Submission
+    const formData = new FormData();
+    formData.append("courseData", JSON.stringify(courseData)); // ✅ Convert object to JSON string
+    formData.append("image", image); // ✅ Append image file
+  
+    // ✅ Append Course Documents (Syllabus, PDFs)
+    courseDocuments.forEach((doc) => {
+      formData.append("documents", doc);
+    });
+  
+    // ✅ Append Lecture Documents (Per Lecture File)
+    chapters.forEach((chapter) => {
+      chapter.chapterContent.forEach((lecture) => {
+        if (lecture.lectureFile) {
+          formData.append(`lectureFiles`, lecture.lectureFile);
+        }
       });
-
-      const data = await response.json(); // ✅ Parse response JSON
-
-      if (!response.ok) {
-          throw new Error(data.message || "Failed to create course");
-      }
-
-      console.log("✅ Course Created:", data);
-      alert("Course added successfully!");
-
-      // ✅ Reset Form Fields After Successful Submission
-      setCourseTitle("");
-      setCoursePrice(0);
-      setDiscount(0);
-      setImage(null);
-      setPreviewImage(null);
-      setChapters([]);
-      if (quillRef.current) quillRef.current.root.innerHTML = ""; // ✅ Clear Quill editor
-
-  } catch (error) {
-      console.error("❌ Error adding course:", error);
-      alert(`Error: ${error.message}`);
-  }
-};
+    });
+  
+    try {
+        // ✅ Submit Course Data Using `fetch`
+        const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}/educators/add-course`, {
+            method: "POST",
+            body: formData, // ✅ Sending `FormData`
+            headers: {
+                Authorization: `Bearer ${localStorage.getItem("token")}`, // ✅ Include token if required
+            },
+        });
+  
+        const data = await response.json(); // ✅ Parse response JSON
+  
+        if (!response.ok) {
+            throw new Error(data.message || "Failed to create course");
+        }
+  
+        toast.success("Course added successfully!");
+  
+        // ✅ Reset Form Fields After Successful Submission
+        setCourseTitle("");
+        setCoursePrice(0);
+        setDiscount(0);
+        setImage(null);
+        setPreviewImage(null);
+        setChapters([]);
+        if (quillRef.current) quillRef.current.root.innerHTML = ""; // ✅ Clear Quill editor
+  
+    } catch (error) {
+        console.error("❌ Error adding course:", error);
+        alert(`Error: ${error.message}`);
+    }
+  };
 
   return (
     <div className='h-screen overflow-scroll flex flex-col items-start justify-between md:p-8 md:pb-0 p-4 pt-8 pb-0'>
@@ -209,6 +243,17 @@ const handleSubmit = async (e) => {
           <p>Course Description</p>
           <div ref={editorRef}></div>
         </div>
+
+        <div className='flex flex-col gap-1'>
+            <p>Course Syllabus (PDF, DOCX, PPTX)</p>
+            <input 
+              type="file" 
+              multiple 
+              accept=".pdf,.docx,.ppt,.pptx"
+              onChange={(e) => setCourseDocuments([...e.target.files])} 
+              className="outline-none md:py-2.5 py-2 px-3 rounded border border-gray-500"
+            />
+          </div>
 
         <div className='flex items-center justify-between flex-wrap'>
             <div className='flex flex-col gap-1'>
@@ -298,6 +343,8 @@ const handleSubmit = async (e) => {
                           + Add Chapter
                         </div>
 
+
+{/*-------------------------------======================lecture start====================----------------------------------*/}
                         {showPopup && (
                           <div className='fixed inset-0 flex items-center justify-center bg-gray-800 bg-opacity-50'>
                             <div className='bg-white text-gray-700 p-4 rounded relative w-full max-w-80'>
@@ -329,18 +376,47 @@ const handleSubmit = async (e) => {
                                 />
                               </div>
 
-                              <div className="mb-2">
-                                <p>Lecture URL</p>
-                                <input
-                                  type="text"
-                                  className="mt-1 block w-full border rounded py-1 px-2"
-                                  value={lectureDetails.lectureUrl}
-                                  onChange={(e) => setLectureDetails({ 
-                                    ...lectureDetails, 
-                                    lectureUrl: e.target.value 
-                                  })}
-                                />
-                              </div>
+                                <div className="mb-2">
+                                  <p>Lecture Type</p>
+                                  <select
+                                    className="mt-1 block w-full border rounded py-1 px-2"
+                                    onChange={(e) => setLectureDetails({ ...lectureDetails, lectureType: e.target.value })}
+                                  >
+                                    <option value="video">Video URL</option>
+                                    <option value="document">Upload Document</option>
+                                  </select>
+                                </div>
+
+                              {/* Show Video URL input if selected */}
+                              {lectureDetails.lectureType === "video" && (
+                                <div className="mb-2">
+                                  <p>Lecture URL</p>
+                                  <input
+                                    type="text"
+                                    className="mt-1 block w-full border rounded py-1 px-2"
+                                    value={lectureDetails.lectureUrl}
+                                    onChange={(e) =>
+                                      setLectureDetails({ ...lectureDetails, lectureUrl: e.target.value, lectureFile: null })
+                                    }
+                                  />
+                                </div>
+                              )}
+
+                              {/* Show File Upload if "document" is selected */}
+                              {lectureDetails.lectureType === "document" && (
+                                  <div className="mb-2">
+                                    <p>Upload Document</p>
+                                    <input
+                                      type="file"
+                                      className="mt-1 block w-full border rounded py-1 px-2"
+                                      accept=".pdf,.docx,.ppt,.pptx"
+                                      onChange={(e) =>
+                                        setLectureDetails({ ...lectureDetails, lectureFile: e.target.files[0], lectureUrl: "" })
+                                      }
+                                    />
+                                  </div>
+                                )}
+
 
                               <div className="flex gap-2 my-4">
                                 <p>Is Preview Free?</p>
@@ -369,6 +445,7 @@ const handleSubmit = async (e) => {
                             </div>
                           </div>
                         )}
+{/*-------------------------------======================lecture==================--------------------------------*/}
 
             </div>
 

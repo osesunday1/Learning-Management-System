@@ -1,9 +1,8 @@
 import React, { useContext, useState } from "react";
 import styled from "styled-components";
 import { AppContext } from "../../context/AppContext";
-import axios from "axios";
 import { toast } from "react-toastify";
-
+import { useUser } from "../../context/UserContext";
 
 const Auth = () => {
   const [isLogin, setIsLogin] = useState(false);
@@ -14,6 +13,7 @@ const Auth = () => {
   const [lastName, setLastName] = useState("");
   const [profileImage, setProfileImage] = useState(null);
   const [loading, setLoading] = useState(false); //Prevent multiple clicks
+  const { setUserData } = useUser();
 
   const {navigate} = useContext(AppContext)
 
@@ -50,8 +50,12 @@ const Auth = () => {
       const data = await response.json();
       if (data.token) {
         localStorage.setItem("token", data.token);
-        localStorage.setItem("role", data.data.user.role);
         localStorage.setItem("userID", data.data.user._id);
+
+        // Pass the full user here
+        setUserData(data.data.user); // 👈 pass the full user here
+
+
          
          if (data.data.user.role === "student"){
           navigate('/course-list')
@@ -114,7 +118,7 @@ const handleImageChange = (e) => {
         toast.error(data.message || "Signup failed.");
       }
     } catch (error) {
-      toast.error(error || "Signup failed. Please try again.");;
+      toast.error(error || "Signup failed. Please try again.");
     }
 
     setLoading(false);

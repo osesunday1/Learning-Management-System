@@ -10,10 +10,10 @@ const UserProfile = () => {
 
     // ✅ Form State
     const [formData, setFormData] = useState({
-        name: "",
-        email: "",
-        role: ""
-    });
+        firstName: "",
+        lastName: "",
+        email: ""
+      });
 
     // ✅ Populate form with user data
     useEffect(() => {
