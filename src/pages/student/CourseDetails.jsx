@@ -62,13 +62,20 @@ const CourseDetails = () => {
   const initializePayment = usePaystackPayment(config);
 
   useEffect(() => {
-    if (!allCourses.length || !userData?._id) return;
+    if (!allCourses.length) return;
+  
     const findCourse = allCourses.find(course => course._id === id);
     if (!findCourse) return;
+  
     setCourseData(findCourse);
-    const enrolled = findCourse.enrolledStudents.some(enrolledId => enrolledId === userData._id);
-    setIsAlreadyEnrolled(enrolled);
+  
+    // If user is logged in, check if already enrolled
+    if (userData?._id) {
+      const enrolled = findCourse.enrolledStudents.some(enrolledId => enrolledId === userData._id);
+      setIsAlreadyEnrolled(enrolled);
+    }
   }, [allCourses, id, userData]);
+  
 
   const toggleSection = (index) => {
     setOpenSection(prev => ({
@@ -108,7 +115,7 @@ const CourseDetails = () => {
   };
 
   // ✅ Now safely conditionally render UI
-  if (!userData) return <Loading />;
+  if (!courseData) return <Loading />;;
 
   return courseData ? (
     <>
@@ -253,20 +260,28 @@ const CourseDetails = () => {
 
           {/* Enroll / Proceed Button */}
           {isAlreadyEnrolled ? (
-            <button
-              onClick={() => navigate(`/player/${courseData._id}`)}
-              className="md:mt-6 mt-4 w-full py-3 bg-primary hover:bg-primary-100 text-white rounded font-medium"
-            >
-              Proceed to Course
-            </button>
-          ) : (
-            <button
-              onClick={() => initializePayment(onSuccess, onClose)}
-              className="md:mt-6 mt-4 w-full py-3 bg-secondary hover:bg-secondary-100 text-white rounded font-medium"
-            >
-              Pay & Enroll Now
-            </button>
-          )}
+              <button
+                onClick={() => navigate(`/player/${courseData._id}`)}
+                className="md:mt-6 mt-4 w-full py-3 bg-primary hover:bg-primary-100 text-white rounded font-medium"
+              >
+                Proceed to Course
+              </button>
+            ) : (
+              <button
+                onClick={() => {
+                  if (!userID) {
+                    // Not logged in, redirect to auth
+                    toast.info("Please log in to enroll.");
+                    navigate("/auth");
+                    return;
+                  }
+                  initializePayment(onSuccess, onClose);
+                }}
+                className="md:mt-6 mt-4 w-full py-3 bg-secondary hover:bg-secondary-100 text-white rounded font-medium"
+              >
+                Pay & Enroll Now
+              </button>
+            )}
 
           {/* Course Benefits */}
           <div className='pt-6'>

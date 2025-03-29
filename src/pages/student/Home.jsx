@@ -12,7 +12,6 @@ const Home = () => {
     <div className="flex flex-col items-center space-y-7 text-center">
      <Hero/>
      <CoursesSection/>
-     <TestimonialSection/>
      <Footer/>
     </div>
   );

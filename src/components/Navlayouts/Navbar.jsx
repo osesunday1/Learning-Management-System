@@ -4,144 +4,179 @@ import { Link } from 'react-router-dom';
 import { assets } from '../../assets/assets';
 import { AppContext } from '../../context/AppContext';
 import { CurrencyContext } from '../../context/CurrencyContext';
-
-
+import { FaBars, FaTimes } from 'react-icons/fa';
 
 const Navbar = () => {
-
   const { userData, setUserData } = useUser();
   const role = userData?.role;
 
-  const {navigate} = useContext(AppContext);
-  const [isOpen, setIsOpen] = useState(false);
-
+  const { navigate } = useContext(AppContext);
   const { currency, setCurrency } = useContext(CurrencyContext);
+  const [isDropdownOpen, setDropdownOpen] = useState(false);
+  const [isMobileMenuOpen, setMobileMenuOpen] = useState(false);
 
-
-      // Logout
-    const logoutHandler = () => {
-        localStorage.removeItem("token");
-        localStorage.removeItem("userID");
-        setUserData(null);
-        navigate("/");
-    };
+  // Logout
+  const logoutHandler = () => {
+    localStorage.removeItem('token');
+    localStorage.removeItem('userID');
+    setUserData(null);
+    navigate('/');
+  };
 
   return (
-    <header className={`flex items-center justify-between px-p4 sm:px-10 md:px-14 lg:px-36 border-b border-gray-500 py-4 'bg-primary'}`}>
-            
-            {/* Logo */}
-      <img 
-        onClick={() => {
-          if (role === "educator") navigate("/educator");
-          else if (role === "student") navigate("/course-list");
-          else navigate("/");
-        }}
-        src={assets.logo} alt="Logo" className='w-28 lg:w-32 cursor-pointer' 
-      />
+    <header className="bg-primary border-b border-gray-500 px-4 sm:px-10 md:px-14 lg:px-36 py-4">
+      <div className="flex items-center justify-between">
+        {/* Logo */}
+        <img
+          onClick={() => {
+            if (role === 'educator') navigate('/educator');
+            else if (role === 'student') navigate('/course-list');
+            else navigate('/');
+          }}
+          src={assets.logo}
+          alt="Logo"
+          className="w-28 lg:w-32 cursor-pointer"
+        />
 
-      <nav className="flex gap-4">
-        {!role && (
-          <>
-            <div className="hidden md:flex items-center gap-5 text-gray-500">
-                <div className="flex items-center gap-5">
-                    <div className="text-secondary">
+        {/* Hamburger Icon */}
+        <div className="md:hidden">
+          <button onClick={() => setMobileMenuOpen(!isMobileMenuOpen)}>
+            {isMobileMenuOpen ? <FaTimes size={24} /> : <FaBars size={24} />}
+          </button>
+        </div>
 
-                    <Link to='/course-list' className="mx-4"> All Courses</Link>
-                
-                    </div>
-                </div>
+        {/* Desktop Menu */}
+        <nav className="hidden md:flex gap-6 items-center text-gray-700">
+          {!role && (
+            <>
+              <Link to="/course-list" className="text-secondary">
+                All Courses
+              </Link>
+              <button
+                onClick={() => navigate('/auth')}
+                className="bg-secondary text-white px-5 py-2 rounded-full hover:bg-secondary-100"
+              >
+                Sign In
+              </button>
+            </>
+          )}
 
-                 <button onClick={()=> navigate('/auth')} className="bg-secondary text-white px-5 py-2 rounded-full cursor-pointer hover:bg-secondary-100">Sign In</button>
-            </div>
-          </>
-        )}
+          {role === 'student' && (
+            <>
+              <Link to="/course-list">Courses</Link>
+              <Link to="/my-enrollments">My Enrollments</Link>
 
-        {role === 'student' && (
-          <>
-             
-            <Link to="/course-list">Courses</Link>
-            <Link to="/my-enrollments">My Enrollments</Link>
+              <select
+                value={currency}
+                onChange={(e) => setCurrency(e.target.value)}
+                className="px-3 py-2 border border-gray-300 rounded"
+              >
+                <option value="USD">USD ($)</option>
+                <option value="NGN">NGN (₦)</option>
+              </select>
 
-            <select 
-              value={currency} 
-              onChange={(e) => setCurrency(e.target.value)}
-              className="px-4 py-2  border border-gray-300 focus:outline-none focus:ring-2 focus:ring-secondary text-gray-700 bg-white shadow-sm hover:border-gray-400 transition duration-150 ease-in-out"
-            >
-              <option value="USD">USD ($)</option>
-              <option value="NGN">NGN (₦)</option>
-            </select>
-            <div 
+              <div
                 className="relative"
-                onMouseEnter={() => setIsOpen(true)}
-                onMouseLeave={() => setIsOpen(false)}
-            >
-                {/* User Image */}
-                <img 
-                    src={userData.photo || "/default-avatar.png"} 
-                    alt="User Avatar" 
-                    className="w-10 h-10 rounded-full cursor-pointer border-2 border-white hover:border-gray-400"
+                onMouseEnter={() => setDropdownOpen(true)}
+                onMouseLeave={() => setDropdownOpen(false)}
+              >
+                <img
+                  src={userData.photo || '/default-avatar.png'}
+                  alt="User"
+                  className="w-10 h-10 rounded-full border-2 cursor-pointer"
                 />
-
-                {/* Invisible buffer to prevent flickering */}
-                <div className="absolute top-full w-full h-2"></div>
-
-                {/* Dropdown Menu */}
-                {isOpen && (
-                    <div 
-                        className="absolute right-0 mt-2 w-48 bg-white text-gray-900 rounded-lg shadow-lg z-50"
+                {isDropdownOpen && (
+                  <div className="absolute right-0 mt-2 w-48 bg-white text-gray-900 rounded-lg shadow-lg z-50">
+                    <Link to="/profile" className="block px-4 py-2 hover:bg-gray-200">Profile</Link>
+                    <button
+                      onClick={logoutHandler}
+                      className="w-full text-left px-4 py-2 hover:bg-gray-200"
                     >
-                        <Link to="/profile" className="block px-4 py-2 hover:bg-gray-200">Profile</Link>
-                        <button 
-                            onClick={logoutHandler} 
-                            className="w-full text-left px-4 py-2 hover:bg-gray-200 cursor-pointer"
-                        >
-                            Logout
-                        </button>
-                    </div>
+                      Logout
+                    </button>
+                  </div>
                 )}
-            </div>
-        
-          </>
-        )}
+              </div>
+            </>
+          )}
 
-        {role === 'educator' && (
-          <>
-            <Link to="/educator">Dashboard</Link>
-            <div 
+          {role === 'educator' && (
+            <>
+              <Link to="/educator">Dashboard</Link>
+
+              <div
                 className="relative"
-                onMouseEnter={() => setIsOpen(true)}
-                onMouseLeave={() => setIsOpen(false)}
-            >
-                {/* User Image */}
-                <img 
-                    src={userData.photo || "/default-avatar.png"} 
-                    alt="User Avatar" 
-                    className="w-10 h-10 rounded-full cursor-pointer border-2 border-white hover:border-gray-400"
+                onMouseEnter={() => setDropdownOpen(true)}
+                onMouseLeave={() => setDropdownOpen(false)}
+              >
+                <img
+                  src={userData.photo || '/default-avatar.png'}
+                  alt="User"
+                  className="w-10 h-10 rounded-full border-2 cursor-pointer"
                 />
-
-                {/* Invisible buffer to prevent flickering */}
-                <div className="absolute top-full w-full h-2"></div>
-
-                {/* Dropdown Menu */}
-                {isOpen && (
-                    <div 
-                        className="absolute right-0 mt-2 w-48 bg-white text-gray-900 rounded-lg shadow-lg z-50"
+                {isDropdownOpen && (
+                  <div className="absolute right-0 mt-2 w-48 bg-white text-gray-900 rounded-lg shadow-lg z-50">
+                    <Link to="/profile" className="block px-4 py-2 hover:bg-gray-200">Profile</Link>
+                    <button
+                      onClick={logoutHandler}
+                      className="w-full text-left px-4 py-2 hover:bg-gray-200"
                     >
-                        <Link to="/profile" className="block px-4 py-2 hover:bg-gray-200">Profile</Link>
-                        <button 
-                            onClick={logoutHandler} 
-                            className="w-full text-left px-4 py-2 hover:bg-gray-200 cursor-pointer"
-                        >
-                            Logout
-                        </button>
-                    </div>
+                      Logout
+                    </button>
+                  </div>
                 )}
-            </div>
+              </div>
+            </>
+          )}
+        </nav>
+      </div>
 
+      {/* Mobile Menu */}
+      {isMobileMenuOpen && (
+        <div className="md:hidden mt-4 flex flex-col gap-4 text-gray-700">
+          {!role && (
+            <>
+              <Link to="/course-list" onClick={() => setMobileMenuOpen(false)}>All Courses</Link>
+              <button
+                onClick={() => {
+                  setMobileMenuOpen(false);
+                  navigate('/auth');
+                }}
+                className="bg-secondary text-white px-5 py-2 rounded-full"
+              >
+                Sign In
+              </button>
+            </>
+          )}
 
-          </>
-        )}
-      </nav>
+          {role === 'student' && (
+            <>
+              <Link to="/course-list" onClick={() => setMobileMenuOpen(false)}>Courses</Link>
+              <Link to="/my-enrollments" onClick={() => setMobileMenuOpen(false)}>My Enrollments</Link>
+
+              <select
+                value={currency}
+                onChange={(e) => setCurrency(e.target.value)}
+                className="px-3 py-2 border border-gray-300 rounded"
+              >
+                <option value="USD">USD ($)</option>
+                <option value="NGN">NGN (₦)</option>
+              </select>
+
+              <Link to="/profile" onClick={() => setMobileMenuOpen(false)}>Profile</Link>
+              <button onClick={logoutHandler}>Logout</button>
+            </>
+          )}
+
+          {role === 'educator' && (
+            <>
+              <Link to="/educator" onClick={() => setMobileMenuOpen(false)}>Dashboard</Link>
+              <Link to="/profile" onClick={() => setMobileMenuOpen(false)}>Profile</Link>
+              <button onClick={logoutHandler}>Logout</button>
+            </>
+          )}
+        </div>
+      )}
     </header>
   );
 };
