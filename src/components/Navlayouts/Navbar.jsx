@@ -67,8 +67,8 @@ const Navbar = () => {
               onChange={(e) => setCurrency(e.target.value)}
               className="px-4 py-2  border border-gray-300 focus:outline-none focus:ring-2 focus:ring-secondary text-gray-700 bg-white shadow-sm hover:border-gray-400 transition duration-150 ease-in-out"
             >
-              <option value="NGN">NGN (₦)</option>
               <option value="USD">USD ($)</option>
+              <option value="NGN">NGN (₦)</option>
             </select>
             <div 
                 className="relative"
