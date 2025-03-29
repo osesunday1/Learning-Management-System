@@ -176,7 +176,7 @@ const MainBox = styled.div`
   width: 350px;
   height: 600px;
   border-radius: 10px;
-  box-shadow: 5px 20px 50px #000;
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
   overflow: hidden;
   margin: 0 auto;
 `;
