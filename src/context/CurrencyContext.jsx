@@ -3,7 +3,7 @@ import { createContext, useState, useEffect } from 'react';
 export const CurrencyContext = createContext();
 
 export const CurrencyProvider = ({ children }) => {
-  const [currency, setCurrency] = useState('NGN');
+  const [currency, setCurrency] = useState('USD');
   const [exchangeRate, setExchangeRate] = useState(1); // Default NGN to NGN
 
   useEffect(() => {
