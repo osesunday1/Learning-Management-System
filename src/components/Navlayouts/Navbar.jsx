@@ -114,6 +114,8 @@ const Navbar = () => {
                   alt="User"
                   className="w-10 h-10 rounded-full border-2 cursor-pointer"
                 />
+                {/* Invisible buffer to prevent flickering */}
+                <div className="absolute top-full w-full h-2"></div>
                 {isDropdownOpen && (
                   <div className="absolute right-0 mt-2 w-48 bg-white text-gray-900 rounded-lg shadow-lg z-50">
                     <Link to="/profile" className="block px-4 py-2 hover:bg-gray-200">Profile</Link>
