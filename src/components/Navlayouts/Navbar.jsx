@@ -123,7 +123,7 @@ const Navbar = () => {
                     <Link to="/profile" className="block px-4 py-2 hover:bg-gray-200">Profile</Link>
                     <button
                       onClick={logoutHandler}
-                      className="w-full text-left px-4 py-2 hover:bg-gray-200"
+                      className="w-full text-left px-4 py-2 hover:bg-gray-200 cursor-pointer"
                     >
                       Logout
                     </button>
