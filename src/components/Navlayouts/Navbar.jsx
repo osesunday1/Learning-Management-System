@@ -24,7 +24,7 @@ const Navbar = () => {
   };
 
   return (
-    <header className="bg-secondary border-b border-gray-500 px-4 sm:px-10 md:px-14 lg:px-36 py-4">
+    <header className="bg-white border-b border-gray-500 px-4 sm:px-10 md:px-14 lg:px-36 py-4">
       <div className="flex items-center justify-between">
         {/* Logo */}
         <img
