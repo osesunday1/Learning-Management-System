@@ -3,6 +3,8 @@ import { useUser } from '../../context/UserContext';
 import { Link } from 'react-router-dom';
 import { assets } from '../../assets/assets';
 import { AppContext } from '../../context/AppContext';
+import { CurrencyContext } from '../../context/CurrencyContext';
+
 
 
 const Navbar = () => {
@@ -12,6 +14,8 @@ const Navbar = () => {
 
   const {navigate} = useContext(AppContext);
   const [isOpen, setIsOpen] = useState(false);
+
+  const { currency, setCurrency } = useContext(CurrencyContext);
 
 
       // Logout
@@ -54,9 +58,18 @@ const Navbar = () => {
 
         {role === 'student' && (
           <>
+             
             <Link to="/course-list">Courses</Link>
             <Link to="/my-enrollments">My Enrollments</Link>
-            
+
+            <select 
+              value={currency} 
+              onChange={(e) => setCurrency(e.target.value)}
+              className="px-4 py-2  border border-gray-300 focus:outline-none focus:ring-2 focus:ring-secondary text-gray-700 bg-white shadow-sm hover:border-gray-400 transition duration-150 ease-in-out"
+            >
+              <option value="NGN">NGN (₦)</option>
+              <option value="USD">USD ($)</option>
+            </select>
             <div 
                 className="relative"
                 onMouseEnter={() => setIsOpen(true)}

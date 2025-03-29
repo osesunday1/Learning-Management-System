@@ -8,38 +8,63 @@ import Footer from '../../components/student/Footer';
 import YouTube from 'react-youtube';
 import { toast } from 'react-toastify';
 import { usePaystackPayment } from 'react-paystack';
+import useFetch from '../../components/customHooks/useFetch';
+import { CurrencyContext } from '../../context/CurrencyContext';
 
 const CourseDetails = () => {
   const { id } = useParams();
-
   const [courseData, setCourseData] = useState(null);
   const [openSection, setOpenSection] = useState({});
   const [isAlreadyEnrolled, setIsAlreadyEnrolled] = useState(false);
   const [playerData, setPlayerData] = useState();
+  const apiUrl = import.meta.env.VITE_BACKEND_URL;
+  const publicKey = import.meta.env.VITE_PAYSTACK_PUBLIC_KEY;
+
+  
+
 
   const {
     allCourses,
-    userData,
     calculateRating,
     calculateNoOfLectures,
     calculateCourseDuration,
     calculateChapterTime,
-    currency,
     navigate
   } = useContext(AppContext);
 
-  const apiUrl = import.meta.env.VITE_BACKEND_URL;
-  const publicKey = import.meta.env.VITE_PAYSTACK_PUBLIC_KEY;
+  const userID = localStorage.getItem("userID");
+  const { data: userData } = useFetch(userID ? `${apiUrl}/users/me` : null);
+
+  const { currency, exchangeRate } = useContext(CurrencyContext)
+  //const priceInSelectedCurrency = currency === 'NGN' ? courseData.coursePrice * exchangeRate : courseData.coursePrice;
+
+  const discountedPrice = courseData
+    ? (courseData.coursePrice - courseData.discount / 100 * courseData.coursePrice).toFixed(2)
+    : 0;
+
+    // Convert to selected currency
+  const finalDiscountedPrice = currency === 'NGN'
+  ? (discountedPrice * exchangeRate).toFixed(2)
+  : discountedPrice;
+
+  const finalOriginalPrice = currency === 'NGN'
+  ? (courseData?.coursePrice * exchangeRate).toFixed(2)
+  : courseData?.coursePrice;
+
+  const config = {
+    reference: new Date().getTime().toString(),
+    email: userData?.email || '',
+    amount: parseFloat(finalDiscountedPrice) * 100, // Paystack expects kobo
+    currency, 
+    publicKey,
+  };
+
+  const initializePayment = usePaystackPayment(config);
 
   useEffect(() => {
     if (!allCourses.length || !userData?._id) return;
-
     const findCourse = allCourses.find(course => course._id === id);
-    if (!findCourse) {
-      console.error("Course not found:", id);
-      return;
-    }
-
+    if (!findCourse) return;
     setCourseData(findCourse);
     const enrolled = findCourse.enrolledStudents.some(enrolledId => enrolledId === userData._id);
     setIsAlreadyEnrolled(enrolled);
@@ -50,18 +75,6 @@ const CourseDetails = () => {
       ...prev,
       [index]: !prev[index],
     }));
-  };
-
-  // Paystack Config
-  const discountedPrice = courseData
-    ? (courseData.coursePrice - courseData.discount / 100 * courseData.coursePrice).toFixed(2)
-    : 0;
-
-  const config = {
-    reference: new Date().getTime().toString(),
-    email: userData.email,
-    amount: parseFloat(discountedPrice) * 100, // in Kobo
-    publicKey,
   };
 
   const onSuccess = async (reference) => {
@@ -79,7 +92,6 @@ const CourseDetails = () => {
       });
 
       const data = await res.json();
-
       if (data.success) {
         toast.success("Payment verified! You are now enrolled.");
         setIsAlreadyEnrolled(true);
@@ -95,7 +107,8 @@ const CourseDetails = () => {
     toast.info("Transaction was cancelled.");
   };
 
-  const initializePayment = usePaystackPayment(config);
+  // ✅ Now safely conditionally render UI
+  if (!userData) return <Loading />;
 
   return courseData ? (
     <>
@@ -214,10 +227,10 @@ const CourseDetails = () => {
           </div>
 
           <div className='flex gap-3 items-center pt-2'>
-            <p className='text-gray-800 md:text-4xl text-2xl font-semibold'>
-              {currency}{discountedPrice}
+            <p className='text-gray-800 md:text-2xl text-2xl font-semibold'>
+              {currency} {Number(finalDiscountedPrice).toLocaleString()}
             </p>
-            <p className="md:text-lg text-gray-500 line-through">{currency}{courseData.coursePrice}</p>
+            <p className="md:text-lg text-gray-500 line-through">{currency} {Number(finalOriginalPrice).toLocaleString()}</p>
             <p className='md:text-lg text-gray-500'>{courseData.discount}% off</p>
           </div>
 
