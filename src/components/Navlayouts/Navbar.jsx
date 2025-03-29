@@ -54,7 +54,7 @@ const Navbar = () => {
               </Link>
               <button
                 onClick={() => navigate('/auth')}
-                className="bg-secondary text-white px-5 py-2 rounded-full hover:bg-secondary-100"
+                className="bg-secondary text-white px-5 py-2 rounded-full hover:bg-secondary-100 cursor-pointer"
               >
                 Sign In
               </button>
@@ -83,8 +83,10 @@ const Navbar = () => {
                 <img
                   src={userData.photo || '/default-avatar.png'}
                   alt="User"
-                  className="w-10 h-10 rounded-full border-2 cursor-pointer"
+                  className="w-10 h-10 rounded-full border-2 cursor-pointer border-2 border-white hover:border-gray-400"
                 />
+                {/* Invisible buffer to prevent flickering */}
+                <div className="absolute top-full w-full h-2"></div>
                 {isDropdownOpen && (
                   <div className="absolute right-0 mt-2 w-48 bg-white text-gray-900 rounded-lg shadow-lg z-50">
                     <Link to="/profile" className="block px-4 py-2 hover:bg-gray-200">Profile</Link>
@@ -133,7 +135,7 @@ const Navbar = () => {
         </nav>
       </div>
 
-      {/* Mobile Menu */}
+      {/* ===================================Mobile Menu====================================== */}
       {isMobileMenuOpen && (
         <div className="md:hidden mt-4 flex flex-col gap-4 text-gray-700">
           {!role && (
@@ -144,7 +146,7 @@ const Navbar = () => {
                   setMobileMenuOpen(false);
                   navigate('/auth');
                 }}
-                className="bg-secondary text-white px-5 py-2 rounded-full"
+                className="bg-secondary text-white px-5 py-2 rounded-full "
               >
                 Sign In
               </button>

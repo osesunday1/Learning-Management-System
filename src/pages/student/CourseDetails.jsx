@@ -277,7 +277,7 @@ const CourseDetails = () => {
                   }
                   initializePayment(onSuccess, onClose);
                 }}
-                className="md:mt-6 mt-4 w-full py-3 bg-secondary hover:bg-secondary-100 text-white rounded font-medium"
+                className="md:mt-6 mt-4 w-full py-3 bg-secondary hover:bg-secondary-100 text-white rounded font-medium cursor-pointer"
               >
                 Pay & Enroll Now
               </button>
